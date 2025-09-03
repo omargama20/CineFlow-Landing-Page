@@ -1,355 +1,361 @@
-<!DOCTYPE html>
+​<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CineFlow — Todas tus historias en un solo lugar</title>
-  <meta name="description" content="Landing page estilo Netflix/Disney/Prime: hero con CTA, filas de contenido, planes, dispositivos, descarga offline, perfiles para niños y FAQ." />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>CineFlow — Disfruta Cine, Canales y Deportes en Vivo</title>
+  <meta name="description" content="Streaming con canales en vivo, películas y deportes. Actívalo hoy y mira en Smart TV, smartphone y computadora con Smarters IPTV." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#0a0b10; --card:#141724; --soft:#0f1320; --soft2:#0c0f1a; --text:#e8ecf8; --muted:#a3acc4;
-      --brand:#e50914; /* Netflix vibe for primary CTA */
-      --brand-2:#5dd3ff; /* Prime accent */
-      --brand-3:#7b5cff; /* Disney-esque accent */
-      --ok:#10b981; --warn:#f59e0b; --danger:#ef4444; --glass:rgba(255,255,255,.06);
-      --radius:18px;
+      --bg:#0a0b10; --card:#141724; --soft:#0f1320; --text:#e8ecf8; --muted:#a3acc4;
+      /* Degradado CTA tipo MyTraderHub (morado → fucsia) */
+      --cta-from:#6d28d9; --cta-to:#e11d48; --cta-grad:linear-gradient(135deg,var(--cta-from),var(--cta-to)); --cta-glow:rgba(225,29,72,.35);
+      --btn-glass:rgba(255,255,255,.08);
+      --radius:18px; --logo-w:220px; /* mobile-first */
+      --container: 1100px;
     }
+
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:radial-gradient(1200px 800px at 10% -10%, #1a1b38 0%, transparent 60%),radial-gradient(900px 600px at 100% 0%, #0b2742 0%, transparent 60%),var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif}
+    html,body{margin:0;padding:0;background:
+      radial-gradient(900px 600px at 10% -10%, #1a1b38 0%, transparent 60%),
+      radial-gradient(700px 500px at 100% 0%, #0b2742 0%, transparent 60%),
+      var(--bg);
+      color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif;-webkit-tap-highlight-color: transparent}
     a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
+    img,video{max-width:100%;display:block;border:0}
+
+    .container{max-width:var(--container);margin:0 auto;padding:0 16px}
 
     /* Header */
-    .header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(10,11,16,.9) 0%, rgba(10,11,16,.75) 70%, rgba(10,11,16,0) 100%)}
-    .nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:14px 20px}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.5px}
-    .brand__logo{width:36px;height:36px;border-radius:9px;background:conic-gradient(from 225deg, var(--brand), var(--brand-3), var(--brand-2), var(--brand));box-shadow:0 0 0 2px rgba(255,255,255,.06)}
-    .nav__links{margin-left:auto;display:flex;align-items:center;gap:18px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 18px;border-radius:999px;border:1px solid transparent;font-weight:700}
-    .btn--ghost{background:transparent;border-color:rgba(255,255,255,.16)}
-    .btn--primary{background:linear-gradient(180deg, var(--brand) 0%, #b30710 100%);color:white;box-shadow:0 8px 24px rgba(229,9,20,.35)}
-    .btn--trial{background:linear-gradient(180deg, #1cc8ff 0%, #1192be 100%);color:#04121a;box-shadow:0 8px 24px rgba(17,146,190,.35)}
+    .header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(10,11,16,.95), rgba(10,11,16,.7), rgba(10,11,16,0))}
+    .nav{display:flex;align-items:center;gap:12px;padding:12px 0}
+    .brand__logo{width:var(--logo-w)}
+    .brand__logo img{width:100%;mix-blend-mode:screen;opacity:.95;filter:drop-shadow(0 6px 18px rgba(0,0,0,.45))}
+    .nav__links{margin-left:auto;display:flex;align-items:center;gap:10px}
 
-    /* Hero */
+    /* Botones */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 18px;border-radius:999px;border:1px solid transparent;font-weight:800;letter-spacing:.2px;cursor:pointer;transition:transform .08s ease, box-shadow .2s ease}
+    .btn:active{transform:scale(.98)}
+    .btn--primary{background:var(--cta-grad);color:#fff;box-shadow:0 10px 28px var(--cta-glow)}
+    .btn--glass{background:var(--btn-glass);border:1px solid rgba(255,255,255,.14)}
+    .btn--block{width:100%}
+
+    /* Hero + VSL */
     .hero{position:relative;overflow:hidden}
-    .hero__bg{position:absolute;inset:0;z-index:-1;opacity:.35;background:radial-gradient(1200px 800px at 20% 10%, #2b2f72 0%, transparent 60%),radial-gradient(1200px 800px at 80% 0%, #0e5a7e 0%, transparent 60%),url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=1920&auto=format&fit=crop');background-size:cover;background-position:center}
-    .hero__content{max-width:1200px; margin:0 auto; padding:120px 20px 60px; display:grid; grid-template-columns:1.1fr .9fr; gap:32px}
-    .hero h1{font-size:clamp(32px,6vw,56px); line-height:1.05; margin:0 0 12px}
-    .hero p{font-size:clamp(16px,2.4vw,20px); color:var(--muted); margin:0 0 18px}
-    .hero__card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12); padding:22px; border-radius:calc(var(--radius) + 6px); backdrop-filter: blur(6px)}
-    .input{display:flex;gap:10px}
-    .input input{flex:1; padding:14px 16px; border-radius:999px; border:1px solid rgba(255,255,255,.18); background:rgba(6,8,14,.6); color:var(--text); font-size:16px; outline:none}
-    .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
-    .badge{font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.06)}
+    .hero__bg{position:absolute;inset:0;z-index:-1;opacity:.25;background:
+      radial-gradient(900px 600px at 20% 10%, #2b2f72 0%, transparent 60%),
+      radial-gradient(900px 600px at 80% 0%, #0e5a7e 0%, transparent 60%);}
+    .hero__grid{display:grid;gap:18px;padding:90px 0 26px}
+    @media (min-width: 880px){ .hero__grid{grid-template-columns:1.05fr .95fr;gap:28px;padding:110px 0 40px}}
+    .kicker{display:inline-block;font-weight:800;font-size:12px;letter-spacing:.12em;color:#cfd6ea;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+    .hero h1{font-size:clamp(32px,7vw,56px);line-height:1.05;margin:10px 0 10px}
+    .hero p{font-size:clamp(15px,2.5vw,19px);color:var(--muted);margin:0 0 14px}
+    .proof{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06)}
+    .vsl{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);padding:10px;border-radius:16px}
+    .vsl video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
 
-    /* Rows (carousels) */
-    .row{max-width:1200px;margin:0 auto;padding:28px 20px}
-    .row__title{font-size:22px;margin:0 0 12px}
-    .rail{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(150px,22vw,210px);gap:14px;overflow:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
-    .rail::-webkit-scrollbar{height:8px}
-    .rail::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:999px}
-    .poster{position:relative;aspect-ratio:2/3;border-radius:12px;overflow:hidden;background:#0e1220;scroll-snap-align:start;border:1px solid rgba(255,255,255,.08)}
-    .poster img{width:100%;height:100%;object-fit:cover;filter:saturate(.95);transition:transform .4s ease}
-    .poster:hover img{transform:scale(1.06)}
-    .poster__tag{position:absolute;top:8px;left:8px;background:rgba(229,9,20,.95);color:white;font-size:10px;padding:5px 7px;border-radius:999px;font-weight:800}
+    /* Secciones */
+    section{padding:24px 0}
+    .section-title{margin:0 0 10px;font-size:26px}
+    .section-sub{margin:0 0 12px;color:var(--muted)}
 
-    /* Feature blocks */
-    .features{max-width:1200px;margin:0 auto;padding:36px 20px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12); padding:24px; border-radius:var(--radius)}
-    .card h3{margin:0 0 6px}
-    .card p{margin:6px 0 0;color:var(--muted)}
+    /* Testimonios */
+    .testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (min-width:720px){ .testi-grid{grid-template-columns:repeat(4,1fr);gap:14px} }
+    .testi{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:14px;overflow:hidden}
+    .testi img{width:100%;height:auto;display:block}
 
-    /* Plans */
-    .plans{max-width:1200px;margin:0 auto;padding:36px 20px}
-    .plans__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .plan{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius); padding:22px; position:relative}
-    .plan__badge{position:absolute;top:-10px;right:14px;background:linear-gradient(180deg, #ffd54a, #ffb300);color:#2a1b00;border-radius:9px;padding:6px 10px;font-weight:900;font-size:12px;box-shadow:0 8px 20px rgba(255,179,0,.35)}
-    .price{font-size:34px;font-weight:900;display:flex;align-items:flex-end;gap:6px}
+    /* Planes */
+    .plans__grid{display:grid;grid-template-columns:1fr;gap:14px}
+    @media (min-width:880px){ .plans__grid{grid-template-columns:repeat(3,1fr)} }
+    .plan{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px;position:relative}
+    .plan__badge{position:absolute;top:-10px;right:14px;background:linear-gradient(135deg,#ffd54a,#ffb300);color:#2a1b00;border-radius:9px;padding:6px 10px;font-weight:900;font-size:12px;box-shadow:0 8px 20px rgba(255,179,0,.35)}
+    .plan h3{margin:0 0 6px}
+    .price{font-size:32px;font-weight:900;display:flex;align-items:flex-end;gap:6px;margin:6px 0 10px}
     .price small{font-size:12px;color:var(--muted);font-weight:600}
-    .ul{margin:12px 0 18px;padding:0;list-style:none;display:grid;gap:8px;color:var(--muted)}
-    .ul li{display:flex;align-items:flex-start;gap:10px}
+    .ul{margin:8px 0 14px;padding:0;list-style:none;display:grid;gap:8px;color:var(--muted)}
 
-    .toggle{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px;color:var(--muted)}
-    .switch{position:relative;width:54px;height:30px;background:#1a2438;border-radius:999px;cursor:pointer;border:1px solid rgba(255,255,255,.12)}
-    .knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:white;transition:all .25s ease}
-    .switch.active .knob{left:27px}
+    /* Dispositivos + Smarters IPTV */
+    .cards{display:grid;grid-template-columns:1fr;gap:14px}
+    @media (min-width:880px){ .cards{grid-template-columns:1.2fr .8fr} }
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px}
+    .devices__logos{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;opacity:.9;margin:12px 0 0}
+    .devices__logo{background:var(--soft);border:1px solid rgba(255,255,255,.08);border-radius:12px;display:grid;place-items:center;padding:14px;font-weight:800}
+    .app-card{margin-top:12px;display:flex;gap:12px;align-items:center;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px}
+    .app-card img{width:200px;max-width:40vw;height:auto;border-radius:10px}
+    .badge-soft{font-size:12px;display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#cfd6ea}
 
-    /* Devices band */
-    .devices{max-width:1200px;margin:0 auto;padding:28px 20px;display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
-    .devices__logos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;opacity:.88}
-    .devices__logo{background:var(--soft);border:1px solid rgba(255,255,255,.08);border-radius:12px;display:grid;place-items:center;padding:16px;font-weight:800}
+    /* Pasos */
+    .steps{display:grid;grid-template-columns:1fr;gap:10px}
+    @media (min-width:880px){ .steps{grid-template-columns:repeat(3,1fr)} }
+    .step{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px}
+    .step h3{margin:0 0 6px}
+    .step p{margin:0;color:var(--muted)}
 
     /* FAQ */
-    .faq{max-width:900px;margin:0 auto;padding:36px 20px}
+    .faq{max-width:900px;margin:0 auto}
     .accordion{border-top:1px solid rgba(255,255,255,.14)}
     .ac{border-bottom:1px solid rgba(255,255,255,.12)}
-    .ac button{width:100%;text-align:left;background:transparent;border:0;color:var(--text);font-weight:700;padding:18px 6px;display:flex;justify-content:space-between;align-items:center;font-size:18px;cursor:pointer}
+    .ac button{width:100%;text-align:left;background:transparent;border:0;color:var(--text);font-weight:700;padding:16px 0;display:flex;justify-content:space-between;align-items:center;font-size:18px;cursor:pointer}
     .ac__p{max-height:0;overflow:hidden;transition:max-height .35s ease}
-    .ac__p p{margin:0 0 16px;color:var(--muted)}
+    .ac__p p{margin:0 0 14px;color:var(--muted)}
 
     /* Footer */
-    footer{border-top:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.0));margin-top:28px}
-    .foot{max-width:1200px;margin:0 auto;padding:22px 20px;color:#a8b0c6;display:grid;gap:16px}
-    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-    .foot a{color:#a8b0c6}
+    footer{border-top:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.0));margin-top:22px}
+    .foot{color:#a8b0c6}
 
-    /* Responsive */
-    @media (max-width: 960px){
-      .hero__content{grid-template-columns:1fr; padding-top:84px}
-      .features{grid-template-columns:1fr}
-      .plans__grid{grid-template-columns:1fr}
-      .devices{grid-template-columns:1fr}
-      .grid{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:540px){
-      .nav{gap:8px}
-      .btn{padding:10px 14px}
-      .input{flex-direction:column}
-    }
+    /* Barra CTA fija (mobile) */
+    .sticky-cta{position:fixed;left:0;right:0;bottom:10px;z-index:60;display:flex;justify-content:center;padding:0 10px}
+    .sticky-cta__box{width:min(920px,100%);background:rgba(14,18,32,.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px;display:flex;gap:10px;align-items:center}
+    .sticky-cta__box span{font-weight:700;color:#cfd6ea}
+    @media (min-width:880px){ .sticky-cta{display:none} }
+
+    /* POP-UP salida (mobile) */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:flex-end;justify-content:center;z-index:70}
+    .modal.open{display:flex}
+    .modal__sheet{width:100%;max-width:520px;background:#0b0e18;border-top-left-radius:16px;border-top-right-radius:16px;border:1px solid rgba(255,255,255,.12);padding:18px;box-shadow:0 -20px 50px rgba(0,0,0,.4)}
+    .modal h3{margin:0 0 6px}
+    .modal p{margin:0 0 12px;color:var(--muted)}
+    .modal .actions{display:grid;gap:10px}
+    .hint{font-size:12px;color:#aab3cc}
   </style>
 </head>
+
 <body>
   <!-- HEADER -->
   <header class="header">
-    <nav class="nav">
-      <a href="#" class="brand" aria-label="CineFlow">
-        <span class="brand__logo" aria-hidden="true"></span>
-        <span>CineFlow</span>
+    <div class="container nav">
+      <a href="#" aria-label="CineFlow" class="brand__logo">
+        <img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/adf00674abfe081965d31fd6909716429aa4a34d/Black_Flatlay_Photo_Motivational_Finance_Quote_Facebook_Cover-removebg-preview.png" alt="CineFlow">
       </a>
       <div class="nav__links">
-        <a href="#planes" class="btn btn--ghost">Planes</a>
-        <a href="#catalogo" class="btn btn--ghost">Catálogo</a>
-        <a href="#faq" class="btn btn--ghost">Preguntas</a>
-        <a href="#trial" class="btn btn--primary">Iniciar sesión</a>
+        <a href="#testimonios" class="btn btn--glass">Testimonios</a>
+        <a href="#planes" class="btn btn--primary">Comenzar</a>
       </div>
-    </nav>
+    </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero" id="trial" aria-label="Hero">
-    <div class="hero__bg" aria-hidden="true"></div>
-    <div class="hero__content">
+  <!-- HERO + VSL -->
+  <section class="hero">
+    <div class="hero__bg"></div>
+    <div class="container hero__grid">
       <div>
-        <h1>Películas, series y deportes en vivo.<br/> Todo en un solo lugar.</h1>
-        <p>Disfruta en tu TV, laptop, tablet o móvil. Cancela cuando quieras. Sin anuncios en el plan Premium.</p>
-        <div class="hero__card" role="form" aria-label="Form de registro rápido">
-          <div class="input">
-            <input type="email" placeholder="Tu correo electrónico" aria-label="Correo" />
-            <button class="btn btn--primary" onclick="alert('Aquí conectas tu backend / email marketing');">Comenzar</button>
+        <span class="kicker">Activa hoy • En minutos</span>
+        <h1>Películas, canales y deportes <br/>en vivo — <span style="background:var(--cta-grad);-webkit-background-clip:text;background-clip:text;color:transparent">todo en un solo lugar</span>.</h1>
+        <p>Funciona en <strong>Smart TV, smartphone y computadora</strong> con la app Smarters IPTV. Sin instalaciones complicadas.</p>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+          <a href="#planes" class="btn btn--primary">Ver paquetes y activar</a>
+          <a href="#pasos" class="btn btn--glass">¿Cómo contrato?</a>
+        </div>
+
+        <div class="proof">
+          <span class="chip">+1000 canales</span>
+          <span class="chip">Series y películas on-demand</span>
+          <span class="chip">Hasta 3 conexiones</span>
+          <span class="chip">Soporte por WhatsApp</span>
+        </div>
+      </div>
+
+      <div class="vsl">
+        <video controls playsinline>
+          <source src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/1cf8a3aae562155c8b7da4e6aee50d0c0c5be91e/C%C3%B3mo%20se%20ve%20el%20servicio%20de%20Streaming%20de%20Be%20Master%20Digital.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section id="testimonios">
+    <div class="container">
+      <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+      <p class="section-sub">Resultados reales: pagos confirmados, renovaciones y activaciones exitosas.</p>
+
+      <div class="testi-grid">
+        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.07_5b335bd0.jpg" alt="Testimonio 1"></div>
+        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.08_36eaffb2.jpg" alt="Testimonio 2"></div>
+        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.08_572641eb.jpg" alt="Testimonio 3"></div>
+        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.08_837d4b15.jpg" alt="Testimonio 4"></div>
+        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.08_bec9eec3.jpg" alt="Testimonio 5"></div>
+        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.08_fd014d65.jpg" alt="Testimonio 6"></div>
+        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.09_c0e44bb5.jpg" alt="Testimonio 7"></div>
+        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.09_da532eca.jpg" alt="Testimonio 8"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANES debajo de testimonios -->
+  <section id="planes">
+    <div class="container">
+      <h2 class="section-title">Elige tu paquete</h2>
+      <p class="section-sub">La diferencia es el número de <strong>conexiones simultáneas</strong>. Sin anuncios. Sin descargas.</p>
+
+      <div class="plans__grid">
+        <div class="plan">
+          <h3>Básico</h3>
+          <div class="price"><span id="p1">$149</span><small>/mes</small></div>
+          <ul class="ul">
+            <li>1 conexión simultánea</li>
+            <li>+1000 canales y VOD</li>
+            <li>Sin anuncios</li>
+          </ul>
+          <!-- Cambios: pago + comprobante -->
+          <a target="_blank" rel="noopener" href="https://mpago.li/1BYfZx1" class="btn btn--primary btn--block">Pagar ahora</a>
+          <a target="_blank" rel="noopener" href="https://wa.me/TU_NUMERO?text=Hola%2C%20ya%20realic%C3%A9%20el%20pago%20del%20Plan%20B%C3%A1sico%20de%20CineFlow.%20Adjunto%20comprobante%20completo." class="btn btn--glass btn--block">Enviar comprobante por WhatsApp</a>
+        </div>
+
+        <div class="plan">
+          <span class="plan__badge">Más popular</span>
+          <h3>Estándar</h3>
+          <div class="price"><span id="p2">$219</span><small>/mes</small></div>
+          <ul class="ul">
+            <li>2 conexiones simultáneas</li>
+            <li>+1000 canales y VOD</li>
+            <li>Sin anuncios</li>
+          </ul>
+          <a target="_blank" rel="noopener" href="https://mpago.li/2QyZwxb" class="btn btn--primary btn--block">Pagar ahora</a>
+          <a target="_blank" rel="noopener" href="https://wa.me/TU_NUMERO?text=Hola%2C%20ya%20realic%C3%A9%20el%20pago%20del%20Plan%20Est%C3%A1ndar%20de%20CineFlow.%20Adjunto%20comprobante%20completo." class="btn btn--glass btn--block">Enviar comprobante por WhatsApp</a>
+        </div>
+
+        <div class="plan">
+          <h3>Premium</h3>
+          <div class="price"><span id="p3">$299</span><small>/mes</small></div>
+          <ul class="ul">
+            <li>3 conexiones simultáneas</li>
+            <li>+1000 canales y VOD</li>
+            <li>Sin anuncios</li>
+          </ul>
+          <a target="_blank" rel="noopener" href="https://mpago.li/1X6DVc6" class="btn btn--primary btn--block">Pagar ahora</a>
+          <a target="_blank" rel="noopener" href="https://wa.me/TU_NUMERO?text=Hola%2C%20ya%20realic%C3%A9%20el%20pago%20del%20Plan%20Premium%20de%20CineFlow.%20Adjunto%20comprobante%20completo." class="btn btn--glass btn--block">Enviar comprobante por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pasos -->
+  <section id="pasos">
+    <div class="container">
+      <h2 class="section-title">Contrata en 3 pasos</h2>
+      <div class="steps">
+        <div class="step"><h3>Paso #1</h3><p>Selecciona tu paquete (1, 2 o 3 conexiones) y realiza el pago.</p></div>
+        <div class="step"><h3>Paso #2</h3><p>Envía <strong>el comprobante completo</strong> por WhatsApp.</p></div>
+        <div class="step"><h3>Paso #3</h3><p>Te compartimos <strong>instrucciones de instalación</strong> y accesos al contenido.</p></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+        <a href="#planes" class="btn btn--primary">Quiero contratar</a>
+        <a href="#faq" class="btn btn--glass">Resolver dudas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dispositivos + Smarters IPTV -->
+  <section id="devices">
+    <div class="container cards">
+      <div class="card">
+        <h3>Disfruta en cualquier dispositivo</h3>
+        <p>Smart TVs, computadoras, tablets y móviles. Continúa donde te quedaste.</p>
+
+        <div class="devices__logos" aria-hidden="true">
+          <div class="devices__logo">TV</div>
+          <div class="devices__logo">Laptop</div>
+          <div class="devices__logo">Tablet</div>
+          <div class="devices__logo">Móvil</div>
+          <div class="devices__logo">Apple TV</div>
+          <div class="devices__logo">Android TV</div>
+          <div class="devices__logo">Roku</div>
+          <div class="devices__logo">Fire Stick</div>
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+          <a href="#planes" class="btn btn--primary">Activar ahora</a>
+          <a href="#faq" class="btn btn--glass">Preguntas frecuentes</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Usamos la app <strong>Smarters IPTV</strong></h3>
+        <p>Reproduce nuestro contenido en <em>Smart TV</em>, <em>smartphone</em> y <em>computadora</em>.</p>
+        <div class="app-card">
+          <img src="https://smartersiptvpro.fr/wp-content/uploads/2025/04/how-to-use-1024x512-1.webp" alt="Smarters IPTV app" />
+          <div>
+            <span class="badge-soft">Rápido de activar</span>
+            <p style="color:var(--muted);margin:6px 0 0">Descarga la app, ingresa tus accesos y listo. Te guiamos por WhatsApp si lo necesitas.</p>
           </div>
-          <div class="badges" aria-hidden="false">
-            <span class="badge">7 días de prueba</span>
-            <span class="badge">Cancela cuando quieras</span>
-            <span class="badge">Full HD / 4K</span>
-            <span class="badge">Descarga offline</span>
-          </div>
         </div>
-      </div>
-      <div class="hero__side">
-        <div class="card">
-          <h3>Perfiles para niños</h3>
-          <p>Una experiencia segura y divertida. Controles parentales y recomendaciones apropiadas para la edad.</p>
-        </div>
-        <div class="card" style="margin-top:12px">
-          <h3>Sincroniza hasta 4 dispositivos</h3>
-          <p>Mira donde quieras. Reproduce en múltiples pantallas con tu misma cuenta.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROWS / CATALOGO -->
-  <section class="row" id="catalogo" aria-label="Tendencias">
-    <h2 class="row__title">Tendencias en México</h2>
-    <div class="rail">
-      <!-- Usa tus pósters reales; aquí hay placeholders -->
-      <a class="poster" href="#"><span class="poster__tag">TOP 1</span><img src="https://picsum.photos/seed/film1/400/600" alt="Póster 1"/></a>
-      <a class="poster" href="#"><span class="poster__tag">TOP 2</span><img src="https://picsum.photos/seed/film2/400/600" alt="Póster 2"/></a>
-      <a class="poster" href="#"><img src="https://picsum.photos/seed/film3/400/600" alt="Póster 3"/></a>
-      <a class="poster" href="#"><img src="https://picsum.photos/seed/film4/400/600" alt="Póster 4"/></a>
-      <a class="poster" href="#"><img src="https://picsum.photos/seed/film5/400/600" alt="Póster 5"/></a>
-      <a class="poster" href="#"><img src="https://picsum.photos/seed/film6/400/600" alt="Póster 6"/></a>
-      <a class="poster" href="#"><img src="https://picsum.photos/seed/film7/400/600" alt="Póster 7"/></a>
-      <a class="poster" href="#"><img src="https://picsum.photos/seed/film8/400/600" alt="Póster 8"/></a>
-    </div>
-  </section>
-
-  <section class="row" aria-label="Recomendado para ti">
-    <h2 class="row__title">Recomendado para ti</h2>
-    <div class="rail">
-      <a class="poster" href="#"><img src="https://picsum.photos/seed/film9/400/600" alt="Póster 9"/></a>
-      <a class="poster" href="#"><img src="https://picsum.photos/seed/film10/400/600" alt="Póster 10"/></a>
-      <a class="poster" href="#"><img src="https://picsum.photos/seed/film11/400/600" alt="Póster 11"/></a>
-      <a class="poster" href="#"><img src="https://picsum.photos/seed/film12/400/600" alt="Póster 12"/></a>
-      <a class="poster" href="#"><img src="https://picsum.photos/seed/film13/400/600" alt="Póster 13"/></a>
-      <a class="poster" href="#"><img src="https://picsum.photos/seed/film14/400/600" alt="Póster 14"/></a>
-      <a class="poster" href="#"><img src="https://picsum.photos/seed/film15/400/600" alt="Póster 15"/></a>
-      <a class="poster" href="#"><img src="https://picsum.photos/seed/film16/400/600" alt="Póster 16"/></a>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="features" aria-label="Características">
-    <div class="card">
-      <h3>Descarga y mira offline</h3>
-      <p>Llévate tus series favoritas a donde no hay señal. Gestiona tu contenido sin conexión.</p>
-    </div>
-    <div class="card">
-      <h3>Audio espacial & 4K</h3>
-      <p>Soporte para 4K HDR, Dolby Atmos y audio espacial (según dispositivo y título).</p>
-    </div>
-    <div class="card">
-      <h3>Perfiles personalizados</h3>
-      <p>Hasta 5 perfiles por cuenta con recomendaciones únicas para cada uno.</p>
-    </div>
-    <div class="card">
-      <h3>Eventos en vivo</h3>
-      <p>Deportes, conciertos y premieres con baja latencia y DVR en vivo.</p>
-    </div>
-  </section>
-
-  <!-- DEVICES -->
-  <section class="devices" aria-label="Dispositivos compatibles">
-    <div class="card">
-      <h3>Disfruta en cualquier dispositivo</h3>
-      <p class="muted">Smart TVs, consolas, computadoras, tablets y móviles. Continúa donde te quedaste.</p>
-      <div class="devices__logos" aria-hidden="true" style="margin-top:12px">
-        <div class="devices__logo">TV</div>
-        <div class="devices__logo">Laptop</div>
-        <div class="devices__logo">Tablet</div>
-        <div class="devices__logo">Móvil</div>
-        <div class="devices__logo">Apple TV</div>
-        <div class="devices__logo">Android TV</div>
-        <div class="devices__logo">PlayStation</div>
-        <div class="devices__logo">Xbox</div>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Perfiles Kids</h3>
-      <p>Contenidos por edad, temporizador de pantalla y PIN para adultos.</p>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px">
-        <img src="https://picsum.photos/seed/kid1/300/300" alt="Kids 1"/>
-        <img src="https://picsum.photos/seed/kid2/300/300" alt="Kids 2"/>
-        <img src="https://picsum.photos/seed/kid3/300/300" alt="Kids 3"/>
-      </div>
-    </div>
-  </section>
-
-  <!-- PLANS -->
-  <section class="plans" id="planes" aria-label="Planes">
-    <div class="toggle" aria-live="polite">
-      <span>Mensual</span>
-      <div class="switch" id="switch" role="switch" aria-checked="false" tabindex="0" aria-label="Alternar a anual">
-        <div class="knob"></div>
-      </div>
-      <span>Anual <small style="color:#9ae6b4">(Ahorra 20%)</small></span>
-    </div>
-
-    <div class="plans__grid">
-      <div class="plan">
-        <h3>Básico</h3>
-        <div class="price"><span id="p1">$149</span><small>/mes</small></div>
-        <ul class="ul">
-          <li>• 1 pantalla • HD</li>
-          <li>• Catálogo completo</li>
-          <li>• Descargas en 1 dispositivo</li>
-        </ul>
-        <button class="btn btn--ghost" onclick="alert('Tu checkout aquí')">Elegir Básico</button>
-      </div>
-      <div class="plan">
-        <span class="plan__badge">Más popular</span>
-        <h3>Estándar</h3>
-        <div class="price"><span id="p2">$219</span><small>/mes</small></div>
-        <ul class="ul">
-          <li>• 2 pantallas • Full HD</li>
-          <li>• Descargas en 2 dispositivos</li>
-          <li>• Audio mejorado</li>
-        </ul>
-        <button class="btn btn--trial" onclick="alert('Tu checkout aquí')">Probar Estándar</button>
-      </div>
-      <div class="plan">
-        <h3>Premium</h3>
-        <div class="price"><span id="p3">$299</span><small>/mes</small></div>
-        <ul class="ul">
-          <li>• 4 pantallas • 4K HDR</li>
-          <li>• Audio espacial / Dolby Atmos*</li>
-          <li>• Descargas en 4 dispositivos</li>
-        </ul>
-        <button class="btn btn--ghost" onclick="alert('Tu checkout aquí')">Elegir Premium</button>
+        <a href="#planes" class="btn btn--primary btn--block" style="margin-top:12px">Quiero empezar</a>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="faq" id="faq" aria-label="Preguntas frecuentes">
-    <h2 style="margin:0 0 12px">Preguntas frecuentes</h2>
-    <div class="accordion">
-      <div class="ac">
-        <button aria-expanded="false">¿Puedo cancelar cuando quiera? <span>＋</span></button>
-        <div class="ac__p"><p>Sí. No hay contratos de permanencia. Cancela en tu cuenta con un clic.</p></div>
+  <section id="faq">
+    <div class="container faq">
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <div class="accordion">
+        <div class="ac">
+          <button aria-expanded="false">¿Puedo cancelar cuando quiera? <span>＋</span></button>
+          <div class="ac__p"><p>Sí. Simplemente <strong>deja de pagar</strong> y el servicio se pausa al terminar tu periodo. No se cobra nada hasta que vuelvas a contratar.</p></div>
+        </div>
+        <div class="ac">
+          <button aria-expanded="false">¿Hay anuncios? <span>＋</span></button>
+          <div class="ac__p"><p>No. <strong>Ningún plan</strong> incluye anuncios.</p></div>
+        </div>
+        <div class="ac">
+          <button aria-expanded="false">¿Puedo descargar contenido? <span>＋</span></button>
+          <div class="ac__p"><p>No hay descargas: todo se reproduce por streaming.</p></div>
+        </div>
+        <div class="ac">
+          <button aria-expanded="false">¿Qué dispositivos son compatibles? <span>＋</span></button>
+          <div class="ac__p"><p>Smart TVs, Apple TV, Android TV, <strong>Roku</strong>, <strong>Fire Stick</strong>, teléfonos iOS/Android, laptops y tablets.</p></div>
+        </div>
       </div>
-      <div class="ac">
-        <button aria-expanded="false">¿Qué dispositivos son compatibles? <span>＋</span></button>
-        <div class="ac__p"><p>La mayoría de Smart TVs, Apple TV, Android TV, teléfonos iOS/Android, navegadores modernos, consolas PlayStation y Xbox.</p></div>
-      </div>
-      <div class="ac">
-        <button aria-expanded="false">¿El plan Premium tiene anuncios? <span>＋</span></button>
-        <div class="ac__p"><p>No. Premium es 100% sin anuncios. Los otros planes pueden incluir publicidad limitada donde esté disponible.</p></div>
-      </div>
-      <div class="ac">
-        <button aria-expanded="false">¿Hay descargas offline? <span>＋</span></button>
-        <div class="ac__p"><p>Sí. Puedes descargar en el número de dispositivos permitidos por tu plan y ver sin conexión.</p></div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+        <a href="#planes" class="btn btn--primary">Activar mi plan</a>
+        <a href="#pasos" class="btn btn--glass">Ver pasos de contratación</a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (reemplazado por disclaimer simple) -->
   <footer>
-    <div class="foot">
-      <small>© <span id="year"></span> CineFlow. Algunas funciones dependen del dispositivo y título. *Dolby Atmos y 4K requieren hardware compatible.</small>
-      <div class="grid">
-        <div>
-          <strong>Compañía</strong><br>
-          <a href="#">Acerca</a><br>
-          <a href="#">Empleos</a><br>
-          <a href="#">Prensa</a>
-        </div>
-        <div>
-          <strong>Legal</strong><br>
-          <a href="#">Términos</a><br>
-          <a href="#">Privacidad</a><br>
-          <a href="#">Cookies</a>
-        </div>
-        <div>
-          <strong>Ayuda</strong><br>
-          <a href="#">Centro de ayuda</a><br>
-          <a href="#">Soporte técnico</a><br>
-          <a href="#">Contáctanos</a>
-        </div>
-        <div>
-          <strong>Descarga</strong><br>
-          <a href="#">iOS</a><br>
-          <a href="#">Android</a><br>
-          <a href="#">Smart TV</a>
-        </div>
-      </div>
+    <div class="container foot" style="padding:18px 0">
+      <small style="display:block;font-size:12px;line-height:1.5;color:#9aa4c3">
+        © <span id="year"></span> CineFlow. No somos dueños ni almacenamos contenido audiovisual. Actuamos como intermediarios tecnológicos para facilitar el acceso a catálogos de terceros. Todas las marcas y derechos pertenecen a sus respectivos titulares.
+      </small>
     </div>
   </footer>
+
+  <!-- Barra CTA fija (solo mobile) -->
+  <div class="sticky-cta">
+    <div class="sticky-cta__box">
+      <span>¿Listo para ver todo hoy?</span>
+      <a href="#planes" class="btn btn--primary">Elegir paquete</a>
+      <a href="#pasos" class="btn btn--glass">Cómo contratar</a>
+    </div>
+  </div>
+
+  <!-- POP-UP de salida (mobile) -->
+  <div id="exitModal" class="modal" aria-hidden="true">
+    <div class="modal__sheet">
+      <h3>🎁 Promo vigente</h3>
+      <p>Antes de irte, escríbenos por WhatsApp para activar tu promo. <br><strong>Toma captura de este pop-up</strong> para hacerla válida.</p>
+      <div class="actions">
+        <!-- Sustituye TU_NUMERO con tu número de WhatsApp en formato internacional, y texto del mensaje -->
+        <a id="waLink" class="btn btn--primary btn--block" href="https://wa.me/TU_NUMERO?text=Hola%20vengo%20de%20la%20landing%20de%20CineFlow%20(traigo%20captura%20de%20promo)" target="_blank" rel="noopener">Quiero mi promoción</a>
+        <button class="btn btn--glass btn--block" id="exitClose">Seguir navegando</button>
+        <div class="hint">Tip: haz la captura ahora y envíanosla para aplicar la promo.</div>
+      </div>
+    </div>
+  </div>
 
   <script>
     // Año dinámico
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Toggle precios mensual / anual
-    const sw = document.getElementById('switch');
-    const prices = { monthly:[149,219,299], yearly:[149*12*.8,219*12*.8,299*12*.8] };
-    const el = [document.getElementById('p1'), document.getElementById('p2'), document.getElementById('p3')];
-    let annual = false;
-    function fmt(n){ return '$' + Math.round(n); }
-    sw.addEventListener('click',()=>{annual = !annual; sw.classList.toggle('active'); sw.setAttribute('aria-checked', annual ? 'true':'false'); el.forEach((e,i)=>{e.textContent = fmt((annual?prices.yearly:prices.monthly)[i])});});
-    sw.addEventListener('keydown',(e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); sw.click(); }});
 
     // FAQ acordeón
     document.querySelectorAll('.ac button').forEach(btn=>{
@@ -360,6 +366,46 @@
         p.style.maxHeight = expanded ? 0 : p.scrollHeight + 'px';
       });
     });
+
+    /* ========= Exit intent (mobile) =========
+       Dispara si:
+       - El usuario pulsa "atrás" (history back) en móvil.
+       - O si ha scrolleado >50% y luego hace scroll fuerte hacia arriba.
+       Se muestra 1 sola vez por sesión.
+    */
+    const modal = document.getElementById('exitModal');
+    const closeBtn = document.getElementById('exitClose');
+    const openModal = () => {
+      if (sessionStorage.getItem('exit_shown') === '1') return;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+      sessionStorage.setItem('exit_shown','1');
+    };
+    closeBtn.addEventListener('click',()=>{ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
+
+    // 1) Back button trap (solo mobile)
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      history.pushState({p:1}, '', location.href);
+      window.addEventListener('popstate', (e)=>{
+        // usuario intenta salir
+        openModal();
+        // volver a empujar el estado para evitar salir inmediatamente
+        history.pushState({p:1}, '', location.href);
+      }, {passive:true});
+    }
+
+    // 2) Scroll up rápido después de ver >50% de la página
+    let lastY = window.scrollY, fired = false;
+    window.addEventListener('scroll', ()=>{
+      const y = window.scrollY, doc = document.documentElement;
+      const scrolled = (y / (doc.scrollHeight - doc.clientHeight));
+      const goingUpFast = (lastY - y) > 120; // gesto de subir fuerte
+      if (!fired && scrolled > 0.5 && goingUpFast && isMobile) {
+        fired = true; openModal();
+      }
+      lastY = y;
+    }, {passive:true});
   </script>
 </body>
 </html>
