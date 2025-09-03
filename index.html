@@ -58,38 +58,13 @@
       font-size: 16px;
       margin-left: 2px;
     }
-    .btn--wa:hover {
-      background: #22bd5c;
-      box-shadow: 0 6px 20px 0 rgba(37,211,102,0.25);
-    }
-    .wa-btn__icon {
-      width: 26px;
-      height: 26px;
-      background: #fff;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      margin-right: 6px;
-    }
-    .wa-btn__icon svg {
-      width: 18px;
-      height: 18px;
-      display:block;
-    }
+    .btn--wa:hover { background: #22bd5c; box-shadow: 0 6px 20px 0 rgba(37,211,102,0.25); }
+    .wa-btn__icon { width: 26px; height: 26px; background: #fff; border-radius: 50%; display: grid; place-items: center; margin-right: 6px; }
+    .wa-btn__icon svg { width: 18px; height: 18px; display:block; }
     @media (max-width:600px){
-      .btn--wa{
-        font-size:14px;
-        padding:10px 14px 10px 10px;
-      }
-      .wa-btn__icon{
-        width:22px;
-        height:22px;
-        margin-right:4px;
-      }
-      .wa-btn__icon svg{
-        width:14px;
-        height:14px;
-      }
+      .btn--wa{ font-size:14px; padding:10px 14px 10px 10px; }
+      .wa-btn__icon{ width:22px; height:22px; margin-right:4px; }
+      .wa-btn__icon svg{ width:14px; height:14px; }
     }
 
     /* Hero + VSL */
@@ -107,46 +82,13 @@
     .vsl{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);padding:10px;border-radius:16px}
     .vsl video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
 
-    /* ===== Metrics band (contador tipo mytraderhub) ===== */
-    .metrics-wrap{
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:16px;
-      padding:12px;
-      margin:6px auto 0 auto;
-      max-width:var(--container);
-      box-sizing:border-box;
-    }
-    .metrics {
-      display: grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-      text-align:center;
-      align-items:center;
-      justify-items:center;
-    }
+    /* ===== Metrics band ===== */
+    .metrics-wrap{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:12px;margin:6px auto 0 auto;max-width:var(--container);box-sizing:border-box}
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;align-items:center;justify-items:center}
     @media (max-width:720px){.metrics{grid-template-columns:1fr 1fr}.metrics .metric:last-child{grid-column:1/-1}}
-    .metric {
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:2px;
-      width:100%;
-    }
-    .metric .num{
-      font-weight:900;
-      font-size:clamp(22px,7vw,36px);
-      line-height:1;
-      background:linear-gradient(135deg,var(--cta-from),var(--cta-to));
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-      text-align:center;
-      width:100%;
-    }
-    .metric .label{
-      font-size:12px;color:var(--muted);
-      text-align:center;
-      width:100%;
-    }
+    .metric{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%}
+    .metric .num{font-weight:900;font-size:clamp(22px,7vw,36px);line-height:1;background:linear-gradient(135deg,var(--cta-from),var(--cta-to));-webkit-background-clip:text;background-clip:text;color:transparent;text-align:center;width:100%}
+    .metric .label{font-size:12px;color:var(--muted);text-align:center;width:100%}
 
     /* Secciones */
     section{padding:24px 0}
@@ -177,7 +119,7 @@
     .devices__logo{background:var(--soft);border:1px solid rgba(255,255,255,.08);border-radius:12px;display:grid;place-items:center;padding:14px;font-weight:800}
     .app-card{margin-top:12px;display:flex;gap:12px;align-items:center;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px}
     .app-card img{width:200px;max-width:40vw;height:auto;border-radius:10px}
-    .badge-soft{font-size:12px;display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#cfd6ea}
+    .badge-soft{font-size:12px;display:inline-block;padding:6px 10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#cfd6ea;border-radius:999px}
 
     /* Pasos */
     .steps{display:grid;grid-template-columns:1fr;gap:10px}
@@ -216,16 +158,7 @@
     .hint{font-size:12px;color:#aab3cc}
 
     /* Descargo de responsabilidad */
-    .disclaimer {
-      margin: 32px auto 0 auto;
-      max-width: 800px;
-      color: #a3acc4;
-      font-size: 13px;
-      line-height: 1.7;
-      text-align: center;
-      opacity: 0.82;
-      padding: 14px 22px 24px 22px;
-    }
+    .disclaimer { margin: 32px auto 0; max-width: 800px; color: #a3acc4; font-size: 13px; line-height: 1.7; text-align: center; opacity: .82; padding: 14px 22px 24px; }
   </style>
 </head>
 
@@ -258,7 +191,7 @@
         </div>
 
         <div class="proof">
-          <span class="chip">+1000 canales</span>
+          <span class="chip">+3000 canales</span>
           <span class="chip">Series y películas on-demand</span>
           <span class="chip">Hasta 3 conexiones</span>
           <span class="chip">Soporte por WhatsApp</span>
@@ -266,27 +199,19 @@
       </div>
 
       <div class="vsl">
-        <video controls playsinline>
+        <!-- Autoplay con sonido tras primer gesto -->
+        <video id="vsl" autoplay muted playsinline controls>
           <source src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/1cf8a3aae562155c8b7da4e6aee50d0c0c5be91e/C%C3%B3mo%20se%20ve%20el%20servicio%20de%20Streaming%20de%20Be%20Master%20Digital.mp4" type="video/mp4">
         </video>
       </div>
     </div>
 
-    <!-- ====== CONTADOR tipo mytraderhub (centrado a la página) ====== -->
+    <!-- CONTADOR -->
     <div class="metrics-wrap">
       <div class="metrics" id="metrics">
-        <div class="metric">
-          <div class="num" data-target="2900" data-prefix="+"></div>
-          <div class="label">canales en vivo</div>
-        </div>
-        <div class="metric">
-          <div class="num" data-target="21000" data-prefix="+"></div>
-          <div class="label">películas</div>
-        </div>
-        <div class="metric">
-          <div class="num" data-target="3300" data-prefix="+"></div>
-          <div class="label">series</div>
-        </div>
+        <div class="metric"><div class="num" data-target="2900" data-prefix="+"></div><div class="label">canales en vivo</div></div>
+        <div class="metric"><div class="num" data-target="21000" data-prefix="+"></div><div class="label">películas</div></div>
+        <div class="metric"><div class="num" data-target="3300" data-prefix="+"></div><div class="label">series</div></div>
       </div>
     </div>
   </section>
@@ -310,7 +235,7 @@
     </div>
   </section>
 
-  <!-- PLANES debajo de testimonios -->
+  <!-- PLANES -->
   <section id="planes">
     <div class="container">
       <h2 class="section-title">Elige tu paquete</h2>
@@ -322,10 +247,13 @@
           <div class="price"><span id="p1">$149</span><small>/mes</small></div>
           <ul class="ul">
             <li>1 conexión simultánea</li>
-            <li>+1000 canales y VOD</li>
+            <li>+3000 canales y VOD</li>
             <li>Sin anuncios</li>
           </ul>
-          <a href="#pasos" class="btn btn--primary btn--block">Activar Básico</a>
+          <!-- Pagar paquete 1 -->
+          <a href="https://mpago.li/1BYfZx1" class="btn btn--primary btn--block" target="_blank" rel="noopener">Contratar Básico</a>
+          <!-- Enviar comprobante -->
+          <a href="https://wa.me/TU_NUMERO?text=Hola%20ya%20pagu%C3%A9%20el%20paquete%20B%C3%A1sico%20y%20adjunto%20mi%20comprobante%20para%20activar%20mi%20servicio" class="btn btn--glass btn--block" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a>
         </div>
 
         <div class="plan">
@@ -334,10 +262,13 @@
           <div class="price"><span id="p2">$219</span><small>/mes</small></div>
           <ul class="ul">
             <li>2 conexiones simultáneas</li>
-            <li>+1000 canales y VOD</li>
+            <li>+3000 canales y VOD</li>
             <li>Sin anuncios</li>
           </ul>
-          <a href="#pasos" class="btn btn--primary btn--block">Probar Estándar</a>
+          <!-- Pagar paquete 2 -->
+          <a href="https://mpago.li/2QyZwxb" class="btn btn--primary btn--block" target="_blank" rel="noopener">Contratar Estándar</a>
+          <!-- Enviar comprobante -->
+          <a href="https://wa.me/TU_NUMERO?text=Hola%20ya%20pagu%C3%A9%20el%20paquete%20Est%C3%A1ndar%20y%20adjunto%20mi%20comprobante%20para%20activar%20mi%20servicio" class="btn btn--glass btn--block" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a>
         </div>
 
         <div class="plan">
@@ -345,10 +276,13 @@
           <div class="price"><span id="p3">$299</span><small>/mes</small></div>
           <ul class="ul">
             <li>3 conexiones simultáneas</li>
-            <li>+1000 canales y VOD</li>
+            <li>+3000 canales y VOD</li>
             <li>Sin anuncios</li>
           </ul>
-          <a href="#pasos" class="btn btn--primary btn--block">Elegir Premium</a>
+          <!-- Pagar paquete 3 -->
+          <a href="https://mpago.li/1X6DVc6" class="btn btn--primary btn--block" target="_blank" rel="noopener">Contratar Premium</a>
+          <!-- Enviar comprobante -->
+          <a href="https://wa.me/TU_NUMERO?text=Hola%20ya%20pagu%C3%A9%20el%20paquete%20Premium%20y%20adjunto%20mi%20comprobante%20para%20activar%20mi%20servicio" class="btn btn--glass btn--block" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a>
         </div>
       </div>
     </div>
@@ -443,9 +377,7 @@
   <footer>
     <div class="container foot">
       <small>© <span id="year"></span> CineFlow. Algunas funciones dependen del dispositivo y título.</small>
-      <div class="grid">
-
-      </div>
+      <div class="grid"></div>
     </div>
     <div class="disclaimer">
       <strong>Descargo de responsabilidad:</strong><br>
@@ -461,7 +393,7 @@
       <a href="#planes" class="btn btn--primary">Elegir paquete</a>
       <a href="#pasos" class="btn btn--glass">Cómo contratar</a>
       <!-- Botón WhatsApp integrado -->
-      <a class="btn btn--wa" href="https://wa.me/TU_NUMERO?text=Hola%20quiero%20más%20info%20sobre%20CineFlow" target="_blank" rel="noopener">
+      <a class="btn btn--wa" href="https://wa.me/TU_NUMERO?text=Hola%20quiero%20m%C3%A1s%20info%20sobre%20CineFlow" target="_blank" rel="noopener">
         <span class="wa-btn__icon">
           <svg viewBox="0 0 32 32" fill="none">
             <rect width="32" height="32" rx="16" fill="#25D366"/>
@@ -479,7 +411,7 @@
       <h3>🎁 Promo vigente</h3>
       <p>Antes de irte, escríbenos por WhatsApp para activar tu promo. <br><strong>Toma captura de este pop-up</strong> para hacerla válida.</p>
       <div class="actions">
-        <!-- Sustituye TU_NUMERO con tu número de WhatsApp en formato internacional, y texto del mensaje -->
+        <!-- Sustituye TU_NUMERO por tu número de WhatsApp (ej. 5215512345678) -->
         <a id="waLink" class="btn btn--primary btn--block" href="https://wa.me/TU_NUMERO?text=Hola%20vengo%20de%20la%20landing%20de%20CineFlow%20(traigo%20captura%20de%20promo)" target="_blank" rel="noopener">Quiero mi promoción</a>
         <button class="btn btn--glass btn--block" id="exitClose">Seguir navegando</button>
         <div class="hint">Tip: haz la captura ahora y envíanosla para aplicar la promo.</div>
@@ -501,7 +433,7 @@
       });
     });
 
-    /* ===== One-shot counter (no avanza después) ===== */
+    /* ===== Counter (one-shot) ===== */
     (function(){
       const wrap = document.getElementById('metrics');
       if(!wrap) return;
@@ -510,11 +442,11 @@
         wrap.querySelectorAll('.num').forEach(el=>{
           const target = +el.dataset.target;
           const prefix = el.dataset.prefix || '';
-          const dur = 1400; // ms
+          const dur = 1400;
           const start = performance.now();
           const tick = (t) => {
             const p = Math.min(1, (t - start) / dur);
-            const val = Math.round(target * (0.2 + 0.8 * p)); // arranque suave
+            const val = Math.round(target * (0.2 + 0.8 * p));
             el.textContent = prefix + fmt(Math.min(val, target));
             if(p < 1) requestAnimationFrame(tick);
           };
@@ -525,6 +457,16 @@
         if(entries.some(e=>e.isIntersecting)){ run(); obs.disconnect(); }
       }, {threshold: 0.2});
       obs.observe(wrap);
+    })();
+
+    /* ===== Autoplay VSL con sonido tras primer interacción ===== */
+    (function(){
+      const v = document.getElementById('vsl');
+      if(!v) return;
+      v.play().catch(()=>{ /* silencioso si falla */ });
+      const enableSound = () => { v.muted = false; v.volume = 1; v.play(); };
+      document.addEventListener('click', enableSound, { once: true });
+      document.addEventListener('touchstart', enableSound, { once: true });
     })();
 
     /* ========= Exit intent (mobile) ========= */
@@ -538,17 +480,15 @@
     };
     closeBtn.addEventListener('click',()=>{ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
 
-    // 1) Back button trap (solo mobile)
     const isMobile = /Mobi|Android/i.test(navigator.userAgent);
     if (isMobile) {
       history.pushState({p:1}, '', location.href);
-      window.addEventListener('popstate', (e)=>{
+      window.addEventListener('popstate', ()=>{
         openModal();
         history.pushState({p:1}, '', location.href);
       }, {passive:true});
     }
 
-    // 2) Scroll up rápido después de ver >50% de la página
     let lastY = window.scrollY, fired = false;
     window.addEventListener('scroll', ()=>{
       const y = window.scrollY, doc = document.documentElement;
