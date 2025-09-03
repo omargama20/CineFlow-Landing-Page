@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CineFlow — Todas tus historias en un solo lugar</title>
+  <meta name="description" content="Landing page estilo Netflix/Disney/Prime: hero con CTA, filas de contenido, planes, dispositivos, descarga offline, perfiles para niños y FAQ." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0a0b10; --card:#141724; --soft:#0f1320; --soft2:#0c0f1a; --text:#e8ecf8; --muted:#a3acc4;
+      --brand:#e50914; /* Netflix vibe for primary CTA */
+      --brand-2:#5dd3ff; /* Prime accent */
+      --brand-3:#7b5cff; /* Disney-esque accent */
+      --ok:#10b981; --warn:#f59e0b; --danger:#ef4444; --glass:rgba(255,255,255,.06);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:radial-gradient(1200px 800px at 10% -10%, #1a1b38 0%, transparent 60%),radial-gradient(900px 600px at 100% 0%, #0b2742 0%, transparent 60%),var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Header */
+    .header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(10,11,16,.9) 0%, rgba(10,11,16,.75) 70%, rgba(10,11,16,0) 100%)}
+    .nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:14px 20px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.5px}
+    .brand__logo{width:36px;height:36px;border-radius:9px;background:conic-gradient(from 225deg, var(--brand), var(--brand-3), var(--brand-2), var(--brand));box-shadow:0 0 0 2px rgba(255,255,255,.06)}
+    .nav__links{margin-left:auto;display:flex;align-items:center;gap:18px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 18px;border-radius:999px;border:1px solid transparent;font-weight:700}
+    .btn--ghost{background:transparent;border-color:rgba(255,255,255,.16)}
+    .btn--primary{background:linear-gradient(180deg, var(--brand) 0%, #b30710 100%);color:white;box-shadow:0 8px 24px rgba(229,9,20,.35)}
+    .btn--trial{background:linear-gradient(180deg, #1cc8ff 0%, #1192be 100%);color:#04121a;box-shadow:0 8px 24px rgba(17,146,190,.35)}
+
+    /* Hero */
+    .hero{position:relative;overflow:hidden}
+    .hero__bg{position:absolute;inset:0;z-index:-1;opacity:.35;background:radial-gradient(1200px 800px at 20% 10%, #2b2f72 0%, transparent 60%),radial-gradient(1200px 800px at 80% 0%, #0e5a7e 0%, transparent 60%),url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=1920&auto=format&fit=crop');background-size:cover;background-position:center}
+    .hero__content{max-width:1200px; margin:0 auto; padding:120px 20px 60px; display:grid; grid-template-columns:1.1fr .9fr; gap:32px}
+    .hero h1{font-size:clamp(32px,6vw,56px); line-height:1.05; margin:0 0 12px}
+    .hero p{font-size:clamp(16px,2.4vw,20px); color:var(--muted); margin:0 0 18px}
+    .hero__card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12); padding:22px; border-radius:calc(var(--radius) + 6px); backdrop-filter: blur(6px)}
+    .input{display:flex;gap:10px}
+    .input input{flex:1; padding:14px 16px; border-radius:999px; border:1px solid rgba(255,255,255,.18); background:rgba(6,8,14,.6); color:var(--text); font-size:16px; outline:none}
+    .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+    .badge{font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.06)}
+
+    /* Rows (carousels) */
+    .row{max-width:1200px;margin:0 auto;padding:28px 20px}
+    .row__title{font-size:22px;margin:0 0 12px}
+    .rail{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(150px,22vw,210px);gap:14px;overflow:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
+    .rail::-webkit-scrollbar{height:8px}
+    .rail::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:999px}
+    .poster{position:relative;aspect-ratio:2/3;border-radius:12px;overflow:hidden;background:#0e1220;scroll-snap-align:start;border:1px solid rgba(255,255,255,.08)}
+    .poster img{width:100%;height:100%;object-fit:cover;filter:saturate(.95);transition:transform .4s ease}
+    .poster:hover img{transform:scale(1.06)}
+    .poster__tag{position:absolute;top:8px;left:8px;background:rgba(229,9,20,.95);color:white;font-size:10px;padding:5px 7px;border-radius:999px;font-weight:800}
+
+    /* Feature blocks */
+    .features{max-width:1200px;margin:0 auto;padding:36px 20px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12); padding:24px; border-radius:var(--radius)}
+    .card h3{margin:0 0 6px}
+    .card p{margin:6px 0 0;color:var(--muted)}
+
+    /* Plans */
+    .plans{max-width:1200px;margin:0 auto;padding:36px 20px}
+    .plans__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .plan{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius); padding:22px; position:relative}
+    .plan__badge{position:absolute;top:-10px;right:14px;background:linear-gradient(180deg, #ffd54a, #ffb300);color:#2a1b00;border-radius:9px;padding:6px 10px;font-weight:900;font-size:12px;box-shadow:0 8px 20px rgba(255,179,0,.35)}
+    .price{font-size:34px;font-weight:900;display:flex;align-items:flex-end;gap:6px}
+    .price small{font-size:12px;color:var(--muted);font-weight:600}
+    .ul{margin:12px 0 18px;padding:0;list-style:none;display:grid;gap:8px;color:var(--muted)}
+    .ul li{display:flex;align-items:flex-start;gap:10px}
+
+    .toggle{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px;color:var(--muted)}
+    .switch{position:relative;width:54px;height:30px;background:#1a2438;border-radius:999px;cursor:pointer;border:1px solid rgba(255,255,255,.12)}
+    .knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:white;transition:all .25s ease}
+    .switch.active .knob{left:27px}
+
+    /* Devices band */
+    .devices{max-width:1200px;margin:0 auto;padding:28px 20px;display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
+    .devices__logos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;opacity:.88}
+    .devices__logo{background:var(--soft);border:1px solid rgba(255,255,255,.08);border-radius:12px;display:grid;place-items:center;padding:16px;font-weight:800}
+
+    /* FAQ */
+    .faq{max-width:900px;margin:0 auto;padding:36px 20px}
+    .accordion{border-top:1px solid rgba(255,255,255,.14)}
+    .ac{border-bottom:1px solid rgba(255,255,255,.12)}
+    .ac button{width:100%;text-align:left;background:transparent;border:0;color:var(--text);font-weight:700;padding:18px 6px;display:flex;justify-content:space-between;align-items:center;font-size:18px;cursor:pointer}
+    .ac__p{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .ac__p p{margin:0 0 16px;color:var(--muted)}
+
+    /* Footer */
+    footer{border-top:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.0));margin-top:28px}
+    .foot{max-width:1200px;margin:0 auto;padding:22px 20px;color:#a8b0c6;display:grid;gap:16px}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .foot a{color:#a8b0c6}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero__content{grid-template-columns:1fr; padding-top:84px}
+      .features{grid-template-columns:1fr}
+      .plans__grid{grid-template-columns:1fr}
+      .devices{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:540px){
+      .nav{gap:8px}
+      .btn{padding:10px 14px}
+      .input{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <nav class="nav">
+      <a href="#" class="brand" aria-label="CineFlow">
+        <span class="brand__logo" aria-hidden="true"></span>
+        <span>CineFlow</span>
+      </a>
+      <div class="nav__links">
+        <a href="#planes" class="btn btn--ghost">Planes</a>
+        <a href="#catalogo" class="btn btn--ghost">Catálogo</a>
+        <a href="#faq" class="btn btn--ghost">Preguntas</a>
+        <a href="#trial" class="btn btn--primary">Iniciar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="trial" aria-label="Hero">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__content">
+      <div>
+        <h1>Películas, series y deportes en vivo.<br/> Todo en un solo lugar.</h1>
+        <p>Disfruta en tu TV, laptop, tablet o móvil. Cancela cuando quieras. Sin anuncios en el plan Premium.</p>
+        <div class="hero__card" role="form" aria-label="Form de registro rápido">
+          <div class="input">
+            <input type="email" placeholder="Tu correo electrónico" aria-label="Correo" />
+            <button class="btn btn--primary" onclick="alert('Aquí conectas tu backend / email marketing');">Comenzar</button>
+          </div>
+          <div class="badges" aria-hidden="false">
+            <span class="badge">7 días de prueba</span>
+            <span class="badge">Cancela cuando quieras</span>
+            <span class="badge">Full HD / 4K</span>
+            <span class="badge">Descarga offline</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero__side">
+        <div class="card">
+          <h3>Perfiles para niños</h3>
+          <p>Una experiencia segura y divertida. Controles parentales y recomendaciones apropiadas para la edad.</p>
+        </div>
+        <div class="card" style="margin-top:12px">
+          <h3>Sincroniza hasta 4 dispositivos</h3>
+          <p>Mira donde quieras. Reproduce en múltiples pantallas con tu misma cuenta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROWS / CATALOGO -->
+  <section class="row" id="catalogo" aria-label="Tendencias">
+    <h2 class="row__title">Tendencias en México</h2>
+    <div class="rail">
+      <!-- Usa tus pósters reales; aquí hay placeholders -->
+      <a class="poster" href="#"><span class="poster__tag">TOP 1</span><img src="https://picsum.photos/seed/film1/400/600" alt="Póster 1"/></a>
+      <a class="poster" href="#"><span class="poster__tag">TOP 2</span><img src="https://picsum.photos/seed/film2/400/600" alt="Póster 2"/></a>
+      <a class="poster" href="#"><img src="https://picsum.photos/seed/film3/400/600" alt="Póster 3"/></a>
+      <a class="poster" href="#"><img src="https://picsum.photos/seed/film4/400/600" alt="Póster 4"/></a>
+      <a class="poster" href="#"><img src="https://picsum.photos/seed/film5/400/600" alt="Póster 5"/></a>
+      <a class="poster" href="#"><img src="https://picsum.photos/seed/film6/400/600" alt="Póster 6"/></a>
+      <a class="poster" href="#"><img src="https://picsum.photos/seed/film7/400/600" alt="Póster 7"/></a>
+      <a class="poster" href="#"><img src="https://picsum.photos/seed/film8/400/600" alt="Póster 8"/></a>
+    </div>
+  </section>
+
+  <section class="row" aria-label="Recomendado para ti">
+    <h2 class="row__title">Recomendado para ti</h2>
+    <div class="rail">
+      <a class="poster" href="#"><img src="https://picsum.photos/seed/film9/400/600" alt="Póster 9"/></a>
+      <a class="poster" href="#"><img src="https://picsum.photos/seed/film10/400/600" alt="Póster 10"/></a>
+      <a class="poster" href="#"><img src="https://picsum.photos/seed/film11/400/600" alt="Póster 11"/></a>
+      <a class="poster" href="#"><img src="https://picsum.photos/seed/film12/400/600" alt="Póster 12"/></a>
+      <a class="poster" href="#"><img src="https://picsum.photos/seed/film13/400/600" alt="Póster 13"/></a>
+      <a class="poster" href="#"><img src="https://picsum.photos/seed/film14/400/600" alt="Póster 14"/></a>
+      <a class="poster" href="#"><img src="https://picsum.photos/seed/film15/400/600" alt="Póster 15"/></a>
+      <a class="poster" href="#"><img src="https://picsum.photos/seed/film16/400/600" alt="Póster 16"/></a>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" aria-label="Características">
+    <div class="card">
+      <h3>Descarga y mira offline</h3>
+      <p>Llévate tus series favoritas a donde no hay señal. Gestiona tu contenido sin conexión.</p>
+    </div>
+    <div class="card">
+      <h3>Audio espacial & 4K</h3>
+      <p>Soporte para 4K HDR, Dolby Atmos y audio espacial (según dispositivo y título).</p>
+    </div>
+    <div class="card">
+      <h3>Perfiles personalizados</h3>
+      <p>Hasta 5 perfiles por cuenta con recomendaciones únicas para cada uno.</p>
+    </div>
+    <div class="card">
+      <h3>Eventos en vivo</h3>
+      <p>Deportes, conciertos y premieres con baja latencia y DVR en vivo.</p>
+    </div>
+  </section>
+
+  <!-- DEVICES -->
+  <section class="devices" aria-label="Dispositivos compatibles">
+    <div class="card">
+      <h3>Disfruta en cualquier dispositivo</h3>
+      <p class="muted">Smart TVs, consolas, computadoras, tablets y móviles. Continúa donde te quedaste.</p>
+      <div class="devices__logos" aria-hidden="true" style="margin-top:12px">
+        <div class="devices__logo">TV</div>
+        <div class="devices__logo">Laptop</div>
+        <div class="devices__logo">Tablet</div>
+        <div class="devices__logo">Móvil</div>
+        <div class="devices__logo">Apple TV</div>
+        <div class="devices__logo">Android TV</div>
+        <div class="devices__logo">PlayStation</div>
+        <div class="devices__logo">Xbox</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Perfiles Kids</h3>
+      <p>Contenidos por edad, temporizador de pantalla y PIN para adultos.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px">
+        <img src="https://picsum.photos/seed/kid1/300/300" alt="Kids 1"/>
+        <img src="https://picsum.photos/seed/kid2/300/300" alt="Kids 2"/>
+        <img src="https://picsum.photos/seed/kid3/300/300" alt="Kids 3"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section class="plans" id="planes" aria-label="Planes">
+    <div class="toggle" aria-live="polite">
+      <span>Mensual</span>
+      <div class="switch" id="switch" role="switch" aria-checked="false" tabindex="0" aria-label="Alternar a anual">
+        <div class="knob"></div>
+      </div>
+      <span>Anual <small style="color:#9ae6b4">(Ahorra 20%)</small></span>
+    </div>
+
+    <div class="plans__grid">
+      <div class="plan">
+        <h3>Básico</h3>
+        <div class="price"><span id="p1">$149</span><small>/mes</small></div>
+        <ul class="ul">
+          <li>• 1 pantalla • HD</li>
+          <li>• Catálogo completo</li>
+          <li>• Descargas en 1 dispositivo</li>
+        </ul>
+        <button class="btn btn--ghost" onclick="alert('Tu checkout aquí')">Elegir Básico</button>
+      </div>
+      <div class="plan">
+        <span class="plan__badge">Más popular</span>
+        <h3>Estándar</h3>
+        <div class="price"><span id="p2">$219</span><small>/mes</small></div>
+        <ul class="ul">
+          <li>• 2 pantallas • Full HD</li>
+          <li>• Descargas en 2 dispositivos</li>
+          <li>• Audio mejorado</li>
+        </ul>
+        <button class="btn btn--trial" onclick="alert('Tu checkout aquí')">Probar Estándar</button>
+      </div>
+      <div class="plan">
+        <h3>Premium</h3>
+        <div class="price"><span id="p3">$299</span><small>/mes</small></div>
+        <ul class="ul">
+          <li>• 4 pantallas • 4K HDR</li>
+          <li>• Audio espacial / Dolby Atmos*</li>
+          <li>• Descargas en 4 dispositivos</li>
+        </ul>
+        <button class="btn btn--ghost" onclick="alert('Tu checkout aquí')">Elegir Premium</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq" aria-label="Preguntas frecuentes">
+    <h2 style="margin:0 0 12px">Preguntas frecuentes</h2>
+    <div class="accordion">
+      <div class="ac">
+        <button aria-expanded="false">¿Puedo cancelar cuando quiera? <span>＋</span></button>
+        <div class="ac__p"><p>Sí. No hay contratos de permanencia. Cancela en tu cuenta con un clic.</p></div>
+      </div>
+      <div class="ac">
+        <button aria-expanded="false">¿Qué dispositivos son compatibles? <span>＋</span></button>
+        <div class="ac__p"><p>La mayoría de Smart TVs, Apple TV, Android TV, teléfonos iOS/Android, navegadores modernos, consolas PlayStation y Xbox.</p></div>
+      </div>
+      <div class="ac">
+        <button aria-expanded="false">¿El plan Premium tiene anuncios? <span>＋</span></button>
+        <div class="ac__p"><p>No. Premium es 100% sin anuncios. Los otros planes pueden incluir publicidad limitada donde esté disponible.</p></div>
+      </div>
+      <div class="ac">
+        <button aria-expanded="false">¿Hay descargas offline? <span>＋</span></button>
+        <div class="ac__p"><p>Sí. Puedes descargar en el número de dispositivos permitidos por tu plan y ver sin conexión.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot">
+      <small>© <span id="year"></span> CineFlow. Algunas funciones dependen del dispositivo y título. *Dolby Atmos y 4K requieren hardware compatible.</small>
+      <div class="grid">
+        <div>
+          <strong>Compañía</strong><br>
+          <a href="#">Acerca</a><br>
+          <a href="#">Empleos</a><br>
+          <a href="#">Prensa</a>
+        </div>
+        <div>
+          <strong>Legal</strong><br>
+          <a href="#">Términos</a><br>
+          <a href="#">Privacidad</a><br>
+          <a href="#">Cookies</a>
+        </div>
+        <div>
+          <strong>Ayuda</strong><br>
+          <a href="#">Centro de ayuda</a><br>
+          <a href="#">Soporte técnico</a><br>
+          <a href="#">Contáctanos</a>
+        </div>
+        <div>
+          <strong>Descarga</strong><br>
+          <a href="#">iOS</a><br>
+          <a href="#">Android</a><br>
+          <a href="#">Smart TV</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Toggle precios mensual / anual
+    const sw = document.getElementById('switch');
+    const prices = { monthly:[149,219,299], yearly:[149*12*.8,219*12*.8,299*12*.8] };
+    const el = [document.getElementById('p1'), document.getElementById('p2'), document.getElementById('p3')];
+    let annual = false;
+    function fmt(n){ return '$' + Math.round(n); }
+    sw.addEventListener('click',()=>{annual = !annual; sw.classList.toggle('active'); sw.setAttribute('aria-checked', annual ? 'true':'false'); el.forEach((e,i)=>{e.textContent = fmt((annual?prices.yearly:prices.monthly)[i])});});
+    sw.addEventListener('keydown',(e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); sw.click(); }});
+
+    // FAQ acordeón
+    document.querySelectorAll('.ac button').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const p = btn.parentElement.querySelector('.ac__p');
+        const expanded = btn.getAttribute('aria-expanded')==='true';
+        btn.setAttribute('aria-expanded', !expanded);
+        p.style.maxHeight = expanded ? 0 : p.scrollHeight + 'px';
+      });
+    });
+  </script>
+</body>
+</html>
