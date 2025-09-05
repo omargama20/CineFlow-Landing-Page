@@ -15,6 +15,7 @@
       --btn-glass:rgba(255,255,255,.08);
       --radius:18px; --logo-w:220px;
       --container: 1100px;
+      --green:#25d366;
     }
 
     *{box-sizing:border-box}
@@ -25,6 +26,7 @@
       color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif;-webkit-tap-highlight-color: transparent}
     a{color:inherit;text-decoration:none}
     img,video{max-width:100%;display:block;border:0}
+
     .container{max-width:var(--container);margin:0 auto;padding:0 16px}
 
     /* Header */
@@ -39,8 +41,32 @@
     .btn:active{transform:scale(.98)}
     .btn--primary{background:var(--cta-grad);color:#fff;box-shadow:0 10px 28px var(--cta-glow)}
     .btn--glass{background:var(--btn-glass);border:1px solid rgba(255,255,255,.14)}
-    .btn--wa{background:#25d366;color:#fff;border:none;box-shadow:0 2px 8px rgba(37,211,102,.2)}
     .btn--block{width:100%}
+
+    /* WhatsApp botón estilo */
+    .btn--wa {
+      background: var(--green);
+      color: #fff;
+      border-radius: 999px;
+      font-weight: 800;
+      padding: 12px 18px 12px 12px;
+      gap: 8px;
+      display: inline-flex;
+      align-items: center;
+      border: none;
+      box-shadow: 0 2px 8px 0 rgba(37,211,102,0.18);
+      transition: background .2s, box-shadow .2s;
+      font-size: 16px;
+      margin-left: 2px;
+    }
+    .btn--wa:hover { background: #22bd5c; box-shadow: 0 6px 20px 0 rgba(37,211,102,0.25); }
+    .wa-btn__icon { width: 26px; height: 26px; background: #fff; border-radius: 50%; display: grid; place-items: center; margin-right: 6px; }
+    .wa-btn__icon svg { width: 18px; height: 18px; display:block; }
+    @media (max-width:600px){
+      .btn--wa{ font-size:14px; padding:10px 14px 10px 10px; }
+      .wa-btn__icon{ width:22px; height:22px; margin-right:4px; }
+      .wa-btn__icon svg{ width:14px; height:14px; }
+    }
 
     /* Hero + VSL */
     .hero{position:relative;overflow:hidden}
@@ -54,17 +80,24 @@
     .hero p{font-size:clamp(15px,2.5vw,19px);color:var(--muted);margin:0 0 14px}
     .proof{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
     .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06)}
-    .vsl{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);padding:10px;border-radius:16px;position:relative}
+    .vsl{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);padding:10px;border-radius:16px}
     .vsl video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
-    .sound-hint{position:absolute;right:12px;bottom:12px;background:rgba(0,0,0,.55);padding:6px 10px;border-radius:999px;font-size:12px}
 
-    /* Metrics band */
-    .metrics-wrap{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:12px;margin:6px auto 0 auto;max-width:var(--container)}
-    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}
+    /* Contador */
+    .metrics-wrap{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:16px;
+      padding:12px;
+      margin:6px auto 0 auto;
+      max-width:var(--container);
+      box-sizing:border-box;
+    }
+    .metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; text-align:center; align-items:center; justify-items:center; }
     @media (max-width:720px){.metrics{grid-template-columns:1fr 1fr}.metrics .metric:last-child{grid-column:1/-1}}
-    .metric{display:flex;flex-direction:column;align-items:center}
-    .metric .num{font-weight:900;font-size:clamp(22px,7vw,36px);line-height:1;background:var(--cta-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .metric .label{font-size:12px;color:var(--muted)}
+    .metric {display:flex;flex-direction:column;align-items:center;gap:2px;width:100%}
+    .metric .num{font-weight:900;font-size:clamp(22px,7vw,36px);line-height:1;background:var(--cta-grad);-webkit-background-clip:text;background-clip:text;color:transparent;text-align:center;width:100%}
+    .metric .label{font-size:12px;color:var(--muted);text-align:center;width:100%}
 
     /* Secciones */
     section{padding:24px 0}
@@ -115,28 +148,55 @@
     /* Footer + disclaimer */
     footer{border-top:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.0));margin-top:22px}
     .foot{color:#a8b0c6}
-    .disclaimer{margin: 18px auto 0;max-width: 820px;color:#a3acc4;font-size:13px;line-height:1.7;text-align:center;opacity:.88;padding:12px 20px 22px}
+    .disclaimer { margin: 32px auto 0 auto; max-width: 800px; color: #a3acc4; font-size: 13px; line-height: 1.7; text-align: center; opacity: .82; padding: 14px 22px 24px 22px; }
 
-    /* Barra CTA fija (mobile) */
+    /* Barra CTA fija (visible en mobile y desktop) */
     .sticky-cta{position:fixed;left:0;right:0;bottom:10px;z-index:60;display:flex;justify-content:center;padding:0 10px}
     .sticky-cta__box{width:min(920px,100%);background:rgba(14,18,32,.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     .sticky-cta__box span{font-weight:700;color:#cfd6ea}
-    @media (min-width:880px){ .sticky-cta{display:none} }
 
     /* POP-UP salida (mobile) */
     .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:flex-end;justify-content:center;z-index:70}
     .modal.open{display:flex}
     .modal__sheet{width:100%;max-width:520px;background:#0b0e18;border-top-left-radius:16px;border-top-right-radius:16px;border:1px solid rgba(255,255,255,.12);padding:18px;box-shadow:0 -20px 50px rgba(0,0,0,.4)}
-    .modal h3{margin:0 0 6px}.modal p{margin:0 0 12px;color:var(--muted)}.modal .actions{display:grid;gap:10px}.hint{font-size:12px;color:#aab3cc}
+    .modal h3{margin:0 0 6px}
+    .modal p{margin:0 0 12px;color:var(--muted)}
+    .modal .actions{display:grid;gap:10px}
+    .hint{font-size:12px;color:#aab3cc}
 
-    /* Burbuja WhatsApp fija */
-    .wa-float{position:fixed;right:16px;bottom:86px;z-index:65;display:flex;align-items:center;gap:8px;background:#25d366;color:#032e12;padding:10px 12px;border-radius:999px;font-weight:800;box-shadow:0 8px 22px rgba(37,211,102,.28)}
-    .wa-float img{width:22px;height:22px}
-    @media (min-width:900px){ .wa-float{bottom:20px} }
-
-    /* Banner post-pago (referrer MP) */
-    .proofbar{position:sticky;top:0;z-index:55;background:#0f1a12;border-bottom:1px solid rgba(255,255,255,.08);display:none}
-    .proofbar .inner{max-width:var(--container);margin:0 auto;padding:10px 16px;display:flex;gap:10px;align-items:center}
+    /* Sales feed (notificaciones de compra) */
+    #sales-feed{
+      position:fixed;
+      left:12px;
+      right:12px;
+      bottom:calc(96px + env(safe-area-inset-bottom)); /* arriba de la cajita */
+      z-index:70;
+      pointer-events:none;
+      display:flex;
+      justify-content:center;
+    }
+    #sales-feed .toast{
+      pointer-events:auto;
+      background:rgba(14,18,32,.92);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:14px;
+      padding:12px 14px;
+      box-shadow:0 6px 30px rgba(0,0,0,.35);
+      color:#e9ecf6;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      max-width:min(560px, 92vw);
+      width:max-content;
+      transform:translateY(20px);
+      opacity:0;
+      transition:all .35s ease;
+    }
+    #sales-feed .toast.show{ transform:translateY(0); opacity:1; }
+    #sales-feed .name{ font-weight:800; }
+    #sales-feed .country{ opacity:.9; font-size:12px; margin-left:6px; }
+    #sales-feed .line2{ color:#b8c0d9; }
+    @media (min-width:880px){ #sales-feed{ bottom:110px; } }
   </style>
 </head>
 
@@ -153,14 +213,6 @@
       </div>
     </div>
   </header>
-
-  <!-- Banner post-pago -->
-  <div id="proofbar" class="proofbar">
-    <div class="inner">
-      <strong>¿Ya realizaste tu pago?</strong>
-      <a id="waProofTop" class="btn btn--wa" href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a>
-    </div>
-  </div>
 
   <!-- HERO + VSL -->
   <section class="hero">
@@ -185,10 +237,9 @@
       </div>
 
       <div class="vsl">
-        <video id="vsl" autoplay muted loop playsinline>
+        <video id="vsl" muted playsinline autoplay>
           <source src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/1cf8a3aae562155c8b7da4e6aee50d0c0c5be91e/C%C3%B3mo%20se%20ve%20el%20servicio%20de%20Streaming%20de%20Be%20Master%20Digital.mp4" type="video/mp4">
         </video>
-        <span id="soundHint" class="sound-hint">🔊 Toca para activar sonido</span>
       </div>
     </div>
 
@@ -207,6 +258,7 @@
     <div class="container">
       <h2 class="section-title">Lo que dicen nuestros clientes</h2>
       <p class="section-sub">Resultados reales: pagos confirmados, renovaciones y activaciones exitosas.</p>
+
       <div class="testi-grid">
         <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.07_5b335bd0.jpg" alt="Testimonio 1"></div>
         <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.08_36eaffb2.jpg" alt="Testimonio 2"></div>
@@ -231,10 +283,20 @@
           <h3>Básico</h3>
           <div class="price"><span>$149</span><small>/mes</small></div>
           <ul class="ul">
-            <li>1 conexión simultánea</li><li>+1000 canales y VOD</li><li>Sin anuncios</li>
+            <li>1 conexión simultánea</li>
+            <li>+1000 canales y VOD</li>
+            <li>Sin anuncios</li>
           </ul>
-          <a class="btn btn--primary btn--block" href="https://mpago.li/1BYfZx1" target="_blank" rel="noopener">Pagar Básico</a>
-          <a id="waProof1" class="btn btn--wa btn--block" href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a>
+          <a href="https://mpago.li/1BYfZx1" target="_blank" class="btn btn--primary btn--block">Pagar Básico</a>
+          <a href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" class="btn btn--wa btn--block" rel="noopener">
+            <span class="wa-btn__icon">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect width="32" height="32" rx="16" fill="#25D366"/>
+                <path d="M22.63 18.93c-.36-.18-2.13-1.05-2.46-1.17-.33-.12-.57-.18-.81.18-.24.36-.93 1.17-1.14 1.41-.21.24-.42.27-.78.09-.36-.18-1.53-.56-2.91-1.78-1.08-.96-1.8-2.13-2.01-2.49-.21-.36-.02-.55.16-.73.17-.17.39-.45.58-.68.19-.23.25-.39.39-.64.13-.24.07-.48-.03-.67-.09-.18-.81-1.95-1.12-2.68-.3-.72-.61-.62-.81-.63-.21-.01-.45-.01-.69-.01-.24 0-.63.09-.96.42-.33.33-1.26 1.23-1.26 3.01 0 1.77 1.29 3.47 1.47 3.71.18.24 2.53 3.84 6.22 5.23.87.3 1.55.48 2.08.61.87.22 1.67.19 2.29.12.7-.08 2.13-.87 2.43-1.7.3-.83.3-1.54.21-1.7-.09-.15-.33-.24-.69-.42z" fill="#fff"/>
+              </svg>
+            </span>
+            Enviar comprobante por WhatsApp
+          </a>
         </div>
 
         <div class="plan">
@@ -242,20 +304,40 @@
           <h3>Estándar</h3>
           <div class="price"><span>$219</span><small>/mes</small></div>
           <ul class="ul">
-            <li>2 conexiones simultáneas</li><li>+1000 canales y VOD</li><li>Sin anuncios</li>
+            <li>2 conexiones simultáneas</li>
+            <li>+1000 canales y VOD</li>
+            <li>Sin anuncios</li>
           </ul>
-          <a class="btn btn--primary btn--block" href="https://mpago.li/2QyZwxb" target="_blank" rel="noopener">Pagar Estándar</a>
-          <a id="waProof2" class="btn btn--wa btn--block" href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a>
+          <a href="https://mpago.li/2QyZwxb" target="_blank" class="btn btn--primary btn--block">Pagar Estándar</a>
+          <a href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" class="btn btn--wa btn--block" rel="noopener">
+            <span class="wa-btn__icon">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect width="32" height="32" rx="16" fill="#25D366"/>
+                <path d="M22.63 18.93c-.36-.18-2.13-1.05-2.46-1.17-.33-.12-.57-.18-.81.18-.24.36-.93 1.17-1.14 1.41-.21.24-.42.27-.78.09-.36-.18-1.53-.56-2.91-1.78-1.08-.96-1.8-2.13-2.01-2.49-.21-.36-.02-.55.16-.73.17-.17.39-.45.58-.68.19-.23.25-.39.39-.64.13-.24.07-.48-.03-.67-.09-.18-.81-1.95-1.12-2.68-.3-.72-.61-.62-.81-.63-.21-.01-.45-.01-.69-.01-.24 0-.63.09-.96.42-.33.33-1.26 1.23-1.26 3.01 0 1.77 1.29 3.47 1.47 3.71.18.24 2.53 3.84 6.22 5.23.87.3 1.55.48 2.08.61.87.22 1.67.19 2.29.12.7-.08 2.13-.87 2.43-1.7.3-.83.3-1.54.21-1.7-.09-.15-.33-.24-.69-.42z" fill="#fff"/>
+              </svg>
+            </span>
+            Enviar comprobante por WhatsApp
+          </a>
         </div>
 
         <div class="plan">
           <h3>Premium</h3>
           <div class="price"><span>$299</span><small>/mes</small></div>
           <ul class="ul">
-            <li>3 conexiones simultáneas</li><li>+1000 canales y VOD</li><li>Sin anuncios</li>
+            <li>3 conexiones simultáneas</li>
+            <li>+1000 canales y VOD</li>
+            <li>Sin anuncios</li>
           </ul>
-          <a class="btn btn--primary btn--block" href="https://mpago.li/1X6DVc6" target="_blank" rel="noopener">Pagar Premium</a>
-          <a id="waProof3" class="btn btn--wa btn--block" href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a>
+          <a href="https://mpago.li/1X6DVc6" target="_blank" class="btn btn--primary btn--block">Pagar Premium</a>
+          <a href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" class="btn btn--wa btn--block" rel="noopener">
+            <span class="wa-btn__icon">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect width="32" height="32" rx="16" fill="#25D366"/>
+                <path d="M22.63 18.93c-.36-.18-2.13-1.05-2.46-1.17-.33-.12-.57-.18-.81.18-.24.36-.93 1.17-1.14 1.41-.21.24-.42.27-.78.09-.36-.18-1.53-.56-2.91-1.78-1.08-.96-1.8-2.13-2.01-2.49-.21-.36-.02-.55.16-.73.17-.17.39-.45.58-.68.19-.23.25-.39.39-.64.13-.24.07-.48-.03-.67-.09-.18-.81-1.95-1.12-2.68-.3-.72-.61-.62-.81-.63-.21-.01-.45-.01-.69-.01-.24 0-.63.09-.96.42-.33.33-1.26 1.23-1.26 3.01 0 1.77 1.29 3.47 1.47 3.71.18.24 2.53 3.84 6.22 5.23.87.3 1.55.48 2.08.61.87.22 1.67.19 2.29.12.7-.08 2.13-.87 2.43-1.7.3-.83.3-1.54.21-1.7-.09-.15-.33-.24-.69-.42z" fill="#fff"/>
+              </svg>
+            </span>
+            Enviar comprobante por WhatsApp
+          </a>
         </div>
       </div>
     </div>
@@ -273,7 +355,6 @@
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
         <a href="#planes" class="btn btn--primary">Quiero contratar</a>
         <a href="#faq" class="btn btn--glass">Resolver dudas</a>
-        <a id="waProofSteps" class="btn btn--wa" href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" rel="noopener">Enviar comprobante ahora</a>
       </div>
     </div>
   </section>
@@ -286,10 +367,14 @@
         <p>Smart TVs, computadoras, tablets y móviles. Continúa donde te quedaste.</p>
 
         <div class="devices__logos" aria-hidden="true">
-          <div class="devices__logo">TV</div><div class="devices__logo">Laptop</div>
-          <div class="devices__logo">Tablet</div><div class="devices__logo">Móvil</div>
-          <div class="devices__logo">Apple TV</div><div class="devices__logo">Android TV</div>
-          <div class="devices__logo">Roku</div><div class="devices__logo">Fire Stick</div>
+          <div class="devices__logo">TV</div>
+          <div class="devices__logo">Laptop</div>
+          <div class="devices__logo">Tablet</div>
+          <div class="devices__logo">Móvil</div>
+          <div class="devices__logo">Apple TV</div>
+          <div class="devices__logo">Android TV</div>
+          <div class="devices__logo">Roku</div>
+          <div class="devices__logo">Fire Stick</div>
         </div>
 
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
@@ -318,11 +403,24 @@
     <div class="container faq">
       <h2 class="section-title">Preguntas frecuentes</h2>
       <div class="accordion">
-        <div class="ac"><button aria-expanded="false">¿Puedo cancelar cuando quiera? <span>＋</span></button><div class="ac__p"><p>Sí. Simplemente <strong>deja de pagar</strong> y el servicio se pausa al terminar tu periodo. No se cobra nada hasta que vuelvas a contratar.</p></div></div>
-        <div class="ac"><button aria-expanded="false">¿Hay anuncios? <span>＋</span></button><div class="ac__p"><p>No. <strong>Ningún plan</strong> incluye anuncios.</p></div></div>
-        <div class="ac"><button aria-expanded="false">¿Puedo descargar contenido? <span>＋</span></button><div class="ac__p"><p>No hay descargas: todo se reproduce por streaming.</p></div></div>
-        <div class="ac"><button aria-expanded="false">¿Qué dispositivos son compatibles? <span>＋</span></button><div class="ac__p"><p>Smart TVs, Apple TV, Android TV, <strong>Roku</strong>, <strong>Fire Stick</strong>, teléfonos iOS/Android, laptops y tablets.</p></div></div>
+        <div class="ac">
+          <button aria-expanded="false">¿Puedo cancelar cuando quiera? <span>＋</span></button>
+          <div class="ac__p"><p>Sí. Simplemente <strong>deja de pagar</strong> y el servicio se pausa al terminar tu periodo. No se cobra nada hasta que vuelvas a contratar.</p></div>
+        </div>
+        <div class="ac">
+          <button aria-expanded="false">¿Hay anuncios? <span>＋</span></button>
+          <div class="ac__p"><p>No. <strong>Ningún plan</strong> incluye anuncios.</p></div>
+        </div>
+        <div class="ac">
+          <button aria-expanded="false">¿Puedo descargar contenido? <span>＋</span></button>
+          <div class="ac__p"><p>No hay descargas: todo se reproduce por streaming.</p></div>
+        </div>
+        <div class="ac">
+          <button aria-expanded="false">¿Qué dispositivos son compatibles? <span>＋</span></button>
+          <div class="ac__p"><p>Smart TVs, Apple TV, Android TV, <strong>Roku</strong>, <strong>Fire Stick</strong>, teléfonos iOS/Android, laptops y tablets.</p></div>
+        </div>
       </div>
+
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
         <a href="#planes" class="btn btn--primary">Activar mi plan</a>
         <a href="#pasos" class="btn btn--glass">Ver pasos de contratación</a>
@@ -337,25 +435,30 @@
     </div>
     <div class="disclaimer">
       <strong>Descargo de responsabilidad:</strong><br>
-      Este sitio no aloja, almacena ni distribuye contenido audiovisual propio. CineFlow ofrece acceso a servicios de IPTV y streaming bajo demanda, utilizando plataformas de terceros. El uso del servicio es responsabilidad exclusiva del usuario. Verifica la legalidad de la IPTV en tu país o región antes de contratar. CineFlow no se responsabiliza por la disponibilidad, legalidad o derechos de autor de los canales, películas o series proporcionadas por terceros. Si eres titular de derechos y detectas una posible infracción, contáctanos para investigar y tomar las medidas correspondientes.
+      Este sitio no aloja, almacena ni distribuye contenido audiovisual propio. CineFlow ofrece acceso a servicios de IPTV y streaming bajo demanda, utilizando plataformas de terceros. El uso del servicio es responsabilidad exclusiva del usuario. Verifica la legalidad de la IPTV en tu país o región antes de contratar. CineFlow no se responsabiliza por la disponibilidad, legalidad o derechos de autor de los canales, películas o series proporcionadas por terceros.<br>
+      Si eres titular de derechos y detectas una posible infracción, contáctanos para investigar y tomar las medidas correspondientes.
     </div>
   </footer>
 
-  <!-- Barra CTA fija (solo mobile) -->
+  <!-- Cajita fija inferior (mobile + desktop) -->
   <div class="sticky-cta">
     <div class="sticky-cta__box">
       <span>¿Listo para ver todo hoy?</span>
       <a href="#planes" class="btn btn--primary">Elegir paquete</a>
-      <a href="#pasos" class="btn btn--glass">Cómo contratar</a>
-      <a id="waGlobal" class="btn btn--wa" href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" rel="noopener">Chatear con alguien</a>
+      <a class="btn btn--wa" href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" rel="noopener">
+        <span class="wa-btn__icon">
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect width="32" height="32" rx="16" fill="#25D366"/>
+            <path d="M22.63 18.93c-.36-.18-2.13-1.05-2.46-1.17-.33-.12-.57-.18-.81.18-.24.36-.93 1.17-1.14 1.41-.21.24-.42.27-.78.09-.36-.18-1.53-.56-2.91-1.78-1.08-.96-1.8-2.13-2.01-2.49-.21-.36-.02-.55.16-.73.17-.17.39-.45.58-.68.19-.23.25-.39.39-.64.13-.24.07-.48-.03-.67-.09-.18-.81-1.95-1.12-2.68-.3-.72-.61-.62-.81-.63-.21-.01-.45-.01-.69-.01-.24 0-.63.09-.96.42-.33.33-1.26 1.23-1.26 3.01 0 1.77 1.29 3.47 1.47 3.71.18.24 2.53 3.84 6.22 5.23.87.3 1.55.48 2.08.61.87.22 1.67.19 2.29.12.7-.08 2.13-.87 2.43-1.7.3-.83.3-1.54.21-1.7-.09-.15-.33-.24-.69-.42z" fill="#fff"/>
+          </svg>
+        </span>
+        Chatear con alguien
+      </a>
     </div>
   </div>
 
-  <!-- Burbuja WhatsApp flotante (siempre visible) -->
-  <a id="waBubble" class="wa-float" href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" rel="noopener">
-    <img alt="WhatsApp" src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg">
-    Chatear con alguien
-  </a>
+  <!-- Sales feed (notificaciones de compra) -->
+  <div id="sales-feed" aria-live="polite"></div>
 
   <!-- POP-UP de salida (mobile) -->
   <div id="exitModal" class="modal" aria-hidden="true">
@@ -363,15 +466,12 @@
       <h3>🎁 Promo vigente</h3>
       <p>Antes de irte, escríbenos por WhatsApp para activar tu promo. <br><strong>Toma captura de este pop-up</strong> para hacerla válida.</p>
       <div class="actions">
-        <a id="waPromo" class="btn btn--primary btn--block" href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" rel="noopener">Quiero mi promoción</a>
+        <a id="waLink" class="btn btn--primary btn--block" href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" rel="noopener">Quiero mi promoción</a>
         <button class="btn btn--glass btn--block" id="exitClose">Seguir navegando</button>
         <div class="hint">Tip: haz la captura ahora y envíanosla para aplicar la promo.</div>
       </div>
     </div>
   </div>
-
-  <!-- FEED de compras (toasts) -->
-  <div id="sales-feed" style="position:fixed;bottom:90px;left:20px;z-index:80;display:flex;flex-direction:column;gap:10px;max-width:290px;pointer-events:none"></div>
 
   <script>
     // Año dinámico
@@ -387,14 +487,17 @@
       });
     });
 
-    // Counter one-shot
+    // Contador (one-shot)
     (function(){
-      const wrap = document.getElementById('metrics'); if(!wrap) return;
+      const wrap = document.getElementById('metrics');
+      if(!wrap) return;
       const fmt = n => n.toLocaleString('es-MX');
       const run = () => {
         wrap.querySelectorAll('.num').forEach(el=>{
-          const target = +el.dataset.target, prefix = el.dataset.prefix || '';
-          const dur = 1400, start = performance.now();
+          const target = +el.dataset.target;
+          const prefix = el.dataset.prefix || '';
+          const dur = 1400;
+          const start = performance.now();
           const tick = (t) => {
             const p = Math.min(1, (t - start) / dur);
             const val = Math.round(target * (0.2 + 0.8 * p));
@@ -404,83 +507,102 @@
           requestAnimationFrame(tick);
         });
       };
-      const obs = new IntersectionObserver((e)=>{ if(e.some(x=>x.isIntersecting)){ run(); obs.disconnect(); } }, {threshold:.2});
+      const obs = new IntersectionObserver((entries)=>{
+        if(entries.some(e=>e.isIntersecting)){ run(); obs.disconnect(); }
+      }, {threshold: 0.2});
       obs.observe(wrap);
     })();
 
-    // VSL: activar sonido al primer tap/click
+    // Autoplay VSL y habilitar sonido tras primer interacción
     (function(){
-      const v = document.getElementById('vsl'), hint = document.getElementById('soundHint');
-      const enableSound = ()=>{
-        try{ v.muted=false; v.play().catch(()=>{}); }catch(e){}
-        hint?.remove();
-      };
-      window.addEventListener('click', enableSound, {passive:true, once:true});
-      window.addEventListener('touchstart', enableSound, {passive:true, once:true});
+      const v = document.getElementById('vsl');
+      if(!v) return;
+      const tryPlay = () => v.play().catch(()=>{});
+      tryPlay();
+      const enableSound = () => { v.muted = false; v.volume = 1; v.play(); };
+      document.addEventListener('click', enableSound, { once: true });
+      document.addEventListener('touchstart', enableSound, { once: true });
     })();
-
-    // Mostrar banner post-pago si vienen de MercadoPago o ?pagado=1
-    if (document.referrer.includes('mpago.la') || location.search.includes('pagado=1')) {
-      document.getElementById('proofbar').style.display = 'block';
-    }
 
     // Exit intent (mobile)
     const modal = document.getElementById('exitModal');
     const closeBtn = document.getElementById('exitClose');
     const openModal = () => {
       if (sessionStorage.getItem('exit_shown') === '1') return;
-      modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
       sessionStorage.setItem('exit_shown','1');
     };
-    closeBtn?.addEventListener('click',()=>{ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
+    closeBtn.addEventListener('click',()=>{ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
 
     const isMobile = /Mobi|Android/i.test(navigator.userAgent);
     if (isMobile) {
       history.pushState({p:1}, '', location.href);
-      window.addEventListener('popstate', ()=>{ openModal(); history.pushState({p:1}, '', location.href); }, {passive:true});
+      window.addEventListener('popstate', ()=>{
+        openModal();
+        history.pushState({p:1}, '', location.href);
+      }, {passive:true});
     }
+
     let lastY = window.scrollY, fired = false;
     window.addEventListener('scroll', ()=>{
       const y = window.scrollY, doc = document.documentElement;
       const scrolled = (y / (doc.scrollHeight - doc.clientHeight));
       const goingUpFast = (lastY - y) > 120;
-      if (!fired && scrolled > 0.5 && goingUpFast && isMobile) { fired = true; openModal(); }
+      if (!fired && scrolled > 0.5 && goingUpFast && isMobile) {
+        fired = true; openModal();
+      }
       lastY = y;
     }, {passive:true});
 
-    // Notificaciones simuladas de compras (toasts)
-    (function(){
-      const feed = document.getElementById('sales-feed'); if(!feed) return;
-      const people = [
-        ['Ana','CDMX','MX'],['Luis','Guadalajara','MX'],['María','Monterrey','MX'],['José','Bogotá','CO'],['Camila','Medellín','CO'],
-        ['Carlos','Buenos Aires','AR'],['Valentina','Lima','PE'],['Andrés','Quito','EC'],['Paola','Santiago','CL'],['Diego','San José','CR'],
-        ['Ricardo','Panamá','PA'],['Sofía','La Paz','BO'],['Mateo','Asunción','PY'],['Gabriela','San Salvador','SV'],['Daniel','Tegucigalpa','HN'],
-        ['Fernanda','Managua','NI'],['Jorge','Toluca','MX'],['Elena','Puebla','MX'],['Martín','Rosario','AR'],['Isabella','Cali','CO'],
-        ['Santiago','Cusco','PE'],['Marisol','Antofagasta','CL'],['Héctor','Barranquilla','CO'],['Lucía','Querétaro','MX'],['Pablo','Arequipa','PE'],
-        ['Natalia','Cartagena','CO'],['Emilio','Tijuana','MX'],['Rocío','Mar del Plata','AR'],['Sebastián','Valparaíso','CL'],['Majo','Mérida','MX'],
-        ['César','León','MX'],['Paulina','Hermosillo','MX'],['Bruno','Córdoba','AR'],['Julieta','Montevideo','UY'],['Camilo','Cochabamba','BO']
+    // ===== Sales feed simulado =====
+    (() => {
+      const elFeed = document.getElementById('sales-feed');
+      if (!elFeed) return;
+
+      const names = [
+        ["Julieta","Montevideo","UY"],["Valentina","Santiago","CL"],["Diego","Ciudad de México","MX"],
+        ["Camila","Lima","PE"],["Agustín","Buenos Aires","AR"],["Luciana","Bogotá","CO"],
+        ["Mateo","Guadalajara","MX"],["Sofía","Quito","EC"],["Bruno","Curitiba","BR"],
+        ["Isabella","Medellín","CO"],["Thiago","São Paulo","BR"],["Martina","Asunción","PY"],
+        ["Emilia","Córdoba","AR"],["Benjamín","Monterrey","MX"],["Renata","La Paz","BO"],
+        ["Dylan","San José","CR"],["Antonella","Rosario","AR"],["Sebastián","Caracas","VE"],
+        ["Florencia","Mar del Plata","AR"],["Franco","Valparaíso","CL"],["Gabriela","Tijuana","MX"],
+        ["Juan Pablo","Barranquilla","CO"],["Ximena","Puebla","MX"],["Pedro","Oporto","PT"],
+        ["Nicole","Arequipa","PE"],["Andrés","Manizales","CO"],["Lourdes","Mérida","MX"],
+        ["Marcos","Salvador","BR"],["Paula","Antofagasta","CL"],["Tomás","Neuquén","AR"]
       ];
-      const packs = ['Básico','Estándar','Premium'];
-      const flags = c => ({MX:'🇲🇽',CO:'🇨🇴',AR:'🇦🇷',PE:'🇵🇪',CL:'🇨🇱',EC:'🇪🇨',CR:'🇨🇷',PA:'🇵🇦',PY:'🇵🇾',BO:'🇧🇴',SV:'🇸🇻',HN:'🇭🇳',NI:'🇳🇮',UY:'🇺🇾'}[c]||'🌎');
+      const packs = [
+        {name:"Básico", verb:"acaba de contratar"},
+        {name:"Estándar", verb:"acaba de contratar"},
+        {name:"Premium", verb:"acaba de contratar"}
+      ];
 
-      const makeToast = (n,city,cc,pack)=>{
-        const box = document.createElement('div');
-        box.style.cssText = 'background:rgba(20,23,36,.95);color:#fff;padding:12px 14px;border-radius:12px;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.4);opacity:0;transform:translateY(30px);transition:all .4s ease;pointer-events:auto';
-        box.innerHTML = `<strong>${n}</strong> de ${city} ${flags(cc)}<br><span style="color:#a3acc4">Acaba de contratar <b>${pack}</b></span>`;
-        feed.appendChild(box);
-        requestAnimationFrame(()=>{ box.style.opacity=1; box.style.transform='translateY(0)'; });
-        setTimeout(()=>{ box.style.opacity=0; box.style.transform='translateY(30px)'; setTimeout(()=>box.remove(),400); }, 6000);
-      };
+      const isMob = /Mobi|Android/i.test(navigator.userAgent);
+      const INTERVAL_MS = isMob ? 10000 : 14000; // 10s móvil, 14s desktop
 
-      const schedule = (delay=2500)=>{
-        setTimeout(()=>{
-          const p = people[Math.floor(Math.random()*people.length)];
-          const pack = packs[Math.floor(Math.random()*packs.length)];
-          makeToast(p[0], p[1], p[2], pack);
-          schedule(7000 + Math.random()*6000);
-        }, delay);
-      };
-      schedule(3000);
+      let idx = 0;
+      function nextToast(){
+        const [n, city, cc] = names[idx % names.length];
+        const pack = packs[Math.floor(Math.random()*packs.length)];
+        idx++;
+
+        const t = document.createElement('div');
+        t.className = 'toast';
+        t.innerHTML = `
+          <div>
+            <div><span class="name">${n}</span> de ${city} <span class="country">${cc}</span></div>
+            <div class="line2">Acaba de contratar <strong>${pack.name}</strong></div>
+          </div>
+        `;
+        elFeed.innerHTML = '';
+        elFeed.appendChild(t);
+        requestAnimationFrame(()=> t.classList.add('show'));
+        setTimeout(()=> t.classList.remove('show'), INTERVAL_MS - 1000);
+      }
+
+      nextToast();
+      setInterval(nextToast, INTERVAL_MS);
     })();
   </script>
 </body>
