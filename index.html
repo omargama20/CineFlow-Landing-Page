@@ -7,26 +7,24 @@
   <meta name="description" content="Streaming con canales en vivo, películas y deportes. Actívalo hoy y mira en Smart TV, smartphone y computadora con Smarters IPTV." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-
   <style>
     :root{
       --bg:#0a0b10; --card:#141724; --soft:#0f1320; --text:#e8ecf8; --muted:#a3acc4;
       --cta-from:#6d28d9; --cta-to:#e11d48; --cta-grad:linear-gradient(135deg,var(--cta-from),var(--cta-to)); --cta-glow:rgba(225,29,72,.35);
       --btn-glass:rgba(255,255,255,.08);
       --radius:18px; --logo-w:220px;
-      --container: 1100px;
-      --green:#25d366;
+      --container:1100px; --toast-bg:rgba(18,22,34,.96);
     }
-
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:
-      radial-gradient(900px 600px at 10% -10%, #1a1b38 0%, transparent 60%),
-      radial-gradient(700px 500px at 100% 0%, #0b2742 0%, transparent 60%),
-      var(--bg);
-      color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif;-webkit-tap-highlight-color: transparent}
+    html,body{
+      margin:0;padding:0;background:
+        radial-gradient(900px 600px at 10% -10%, #1a1b38 0%, transparent 60%),
+        radial-gradient(700px 500px at 100% 0%, #0b2742 0%, transparent 60%),
+        var(--bg);
+      color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif;-webkit-tap-highlight-color:transparent
+    }
     a{color:inherit;text-decoration:none}
     img,video{max-width:100%;display:block;border:0}
-
     .container{max-width:var(--container);margin:0 auto;padding:0 16px}
 
     /* Header */
@@ -43,38 +41,20 @@
     .btn--glass{background:var(--btn-glass);border:1px solid rgba(255,255,255,.14)}
     .btn--block{width:100%}
 
-    /* WhatsApp botón estilo */
-    .btn--wa {
-      background: var(--green);
-      color: #fff;
-      border-radius: 999px;
-      font-weight: 800;
-      padding: 12px 18px 12px 12px;
-      gap: 8px;
-      display: inline-flex;
-      align-items: center;
-      border: none;
-      box-shadow: 0 2px 8px 0 rgba(37,211,102,0.18);
-      transition: background .2s, box-shadow .2s;
-      font-size: 16px;
-      margin-left: 2px;
-    }
-    .btn--wa:hover { background: #22bd5c; box-shadow: 0 6px 20px 0 rgba(37,211,102,0.25); }
-    .wa-btn__icon { width: 26px; height: 26px; background: #fff; border-radius: 50%; display: grid; place-items: center; margin-right: 6px; }
-    .wa-btn__icon svg { width: 18px; height: 18px; display:block; }
-    @media (max-width:600px){
-      .btn--wa{ font-size:14px; padding:10px 14px 10px 10px; }
-      .wa-btn__icon{ width:22px; height:22px; margin-right:4px; }
-      .wa-btn__icon svg{ width:14px; height:14px; }
-    }
+    /* WhatsApp special */
+    .btn--wa{background:#25d366;color:#fff;border-radius:999px;font-weight:800;padding:12px 18px 12px 12px;gap:8px;display:inline-flex;align-items:center;border:none;box-shadow:0 2px 8px rgba(37,211,102,.18);transition:background .2s, box-shadow .2s;font-size:16px;margin-left:2px}
+    .btn--wa:hover{background:#22bd5c;box-shadow:0 6px 20px rgba(37,211,102,.25)}
+    .wa-btn__icon{width:26px;height:26px;background:#fff;border-radius:50%;display:grid;place-items:center;margin-right:6px}
+    .wa-btn__icon svg{width:18px;height:18px;display:block}
+    @media (max-width:600px){.btn--wa{font-size:14px;padding:10px 14px 10px 10px}.wa-btn__icon{width:22px;height:22px;margin-right:4px}.wa-btn__icon svg{width:14px;height:14px}}
 
-    /* Hero + VSL */
+    /* Hero */
     .hero{position:relative;overflow:hidden}
     .hero__bg{position:absolute;inset:0;z-index:-1;opacity:.25;background:
       radial-gradient(900px 600px at 20% 10%, #2b2f72 0%, transparent 60%),
-      radial-gradient(900px 600px at 80% 0%, #0e5a7e 0%, transparent 60%);}
+      radial-gradient(900px 600px at 80% 0%, #0e5a7e 0%, transparent 60%)}
     .hero__grid{display:grid;gap:18px;padding:90px 0 26px}
-    @media (min-width: 880px){ .hero__grid{grid-template-columns:1.05fr .95fr;gap:28px;padding:110px 0 40px}}
+    @media (min-width:880px){.hero__grid{grid-template-columns:1.05fr .95fr;gap:28px;padding:110px 0 40px}}
     .kicker{display:inline-block;font-weight:800;font-size:12px;letter-spacing:.12em;color:#cfd6ea;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
     .hero h1{font-size:clamp(32px,7vw,56px);line-height:1.05;margin:10px 0 10px}
     .hero p{font-size:clamp(15px,2.5vw,19px);color:var(--muted);margin:0 0 14px}
@@ -83,36 +63,33 @@
     .vsl{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);padding:10px;border-radius:16px}
     .vsl video{width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
 
-    /* Contador */
-    .metrics-wrap{
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:16px;
-      padding:12px;
-      margin:6px auto 0 auto;
-      max-width:var(--container);
-      box-sizing:border-box;
-    }
-    .metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; text-align:center; align-items:center; justify-items:center; }
+    /* Metrics */
+    .metrics-wrap{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:12px;margin:6px auto 0;max-width:var(--container)}
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;align-items:center;justify-items:center}
     @media (max-width:720px){.metrics{grid-template-columns:1fr 1fr}.metrics .metric:last-child{grid-column:1/-1}}
-    .metric {display:flex;flex-direction:column;align-items:center;gap:2px;width:100%}
-    .metric .num{font-weight:900;font-size:clamp(22px,7vw,36px);line-height:1;background:var(--cta-grad);-webkit-background-clip:text;background-clip:text;color:transparent;text-align:center;width:100%}
-    .metric .label{font-size:12px;color:var(--muted);text-align:center;width:100%}
+    .metric{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%}
+    .metric .num{font-weight:900;font-size:clamp(22px,7vw,36px);line-height:1;background:var(--cta-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .metric .label{font-size:12px;color:var(--muted)}
 
-    /* Secciones */
+    /* Sections */
     section{padding:24px 0}
     .section-title{margin:0 0 10px;font-size:26px}
     .section-sub{margin:0 0 12px;color:var(--muted)}
 
     /* Testimonios */
-    .testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    @media (min-width:720px){ .testi-grid{grid-template-columns:repeat(4,1fr);gap:14px} }
-    .testi{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:14px;overflow:hidden}
-    .testi img{width:100%;height:auto;display:block}
+    .testi-wrap{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:900px){.testi-wrap{grid-template-columns:1.1fr .9fr}}
+    .testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .testi-grid .testi{border:1px solid rgba(255,255,255,.12);border-radius:12px;overflow:hidden;background:rgba(255,255,255,.04)}
+    .testi-grid img{width:100%;height:auto;display:block}
+    .reviews{display:grid;gap:10px}
+    .review{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px}
+    .review b{display:block;margin-bottom:4px}
+    .review p{margin:0;color:var(--muted);line-height:1.6}
 
     /* Planes */
     .plans__grid{display:grid;grid-template-columns:1fr;gap:14px}
-    @media (min-width:880px){ .plans__grid{grid-template-columns:repeat(3,1fr)} }
+    @media (min-width:880px){.plans__grid{grid-template-columns:repeat(3,1fr)}}
     .plan{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px;position:relative}
     .plan__badge{position:absolute;top:-10px;right:14px;background:linear-gradient(135deg,#ffd54a,#ffb300);color:#2a1b00;border-radius:9px;padding:6px 10px;font-weight:900;font-size:12px;box-shadow:0 8px 20px rgba(255,179,0,.35)}
     .plan h3{margin:0 0 6px}
@@ -120,19 +97,19 @@
     .price small{font-size:12px;color:var(--muted);font-weight:600}
     .ul{margin:8px 0 14px;padding:0;list-style:none;display:grid;gap:8px;color:var(--muted)}
 
-    /* Dispositivos + Smarters IPTV */
+    /* Cards */
     .cards{display:grid;grid-template-columns:1fr;gap:14px}
-    @media (min-width:880px){ .cards{grid-template-columns:1.2fr .8fr} }
+    @media (min-width:880px){.cards{grid-template-columns:1.2fr .8fr}}
     .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px}
     .devices__logos{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;opacity:.9;margin:12px 0 0}
     .devices__logo{background:var(--soft);border:1px solid rgba(255,255,255,.08);border-radius:12px;display:grid;place-items:center;padding:14px;font-weight:800}
     .app-card{margin-top:12px;display:flex;gap:12px;align-items:center;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px}
     .app-card img{width:200px;max-width:40vw;height:auto;border-radius:10px}
-    .badge-soft{font-size:12px;display:inline-block;padding:6px 10px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(255,255,255,.05);color:#cfd6ea}
+    .badge-soft{font-size:12px;display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#cfd6ea}
 
-    /* Pasos */
+    /* Steps */
     .steps{display:grid;grid-template-columns:1fr;gap:10px}
-    @media (min-width:880px){ .steps{grid-template-columns:repeat(3,1fr)} }
+    @media (min-width:880px){.steps{grid-template-columns:repeat(3,1fr)}}
     .step{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px}
     .step h3{margin:0 0 6px}
     .step p{margin:0;color:var(--muted)}
@@ -145,17 +122,17 @@
     .ac__p{max-height:0;overflow:hidden;transition:max-height .35s ease}
     .ac__p p{margin:0 0 14px;color:var(--muted)}
 
-    /* Footer + disclaimer */
+    /* Footer */
     footer{border-top:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.0));margin-top:22px}
     .foot{color:#a8b0c6}
-    .disclaimer { margin: 32px auto 0 auto; max-width: 800px; color: #a3acc4; font-size: 13px; line-height: 1.7; text-align: center; opacity: .82; padding: 14px 22px 24px 22px; }
+    .disclaimer{margin:32px auto 0;max-width:800px;color:#a3acc4;font-size:13px;line-height:1.7;text-align:center;opacity:.82;padding:14px 22px 24px}
 
-    /* Barra CTA fija (visible en mobile y desktop) */
+    /* Sticky CTA */
     .sticky-cta{position:fixed;left:0;right:0;bottom:10px;z-index:60;display:flex;justify-content:center;padding:0 10px}
     .sticky-cta__box{width:min(920px,100%);background:rgba(14,18,32,.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     .sticky-cta__box span{font-weight:700;color:#cfd6ea}
 
-    /* POP-UP salida (mobile) */
+    /* Exit modal */
     .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:flex-end;justify-content:center;z-index:70}
     .modal.open{display:flex}
     .modal__sheet{width:100%;max-width:520px;background:#0b0e18;border-top-left-radius:16px;border-top-right-radius:16px;border:1px solid rgba(255,255,255,.12);padding:18px;box-shadow:0 -20px 50px rgba(0,0,0,.4)}
@@ -164,39 +141,29 @@
     .modal .actions{display:grid;gap:10px}
     .hint{font-size:12px;color:#aab3cc}
 
-    /* Sales feed (notificaciones de compra) */
-    #sales-feed{
-      position:fixed;
-      left:12px;
-      right:12px;
-      bottom:calc(96px + env(safe-area-inset-bottom)); /* arriba de la cajita */
-      z-index:70;
-      pointer-events:none;
-      display:flex;
-      justify-content:center;
-    }
-    #sales-feed .toast{
-      pointer-events:auto;
-      background:rgba(14,18,32,.92);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:14px;
-      padding:12px 14px;
-      box-shadow:0 6px 30px rgba(0,0,0,.35);
-      color:#e9ecf6;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      max-width:min(560px, 92vw);
-      width:max-content;
-      transform:translateY(20px);
-      opacity:0;
-      transition:all .35s ease;
-    }
-    #sales-feed .toast.show{ transform:translateY(0); opacity:1; }
-    #sales-feed .name{ font-weight:800; }
-    #sales-feed .country{ opacity:.9; font-size:12px; margin-left:6px; }
-    #sales-feed .line2{ color:#b8c0d9; }
-    @media (min-width:880px){ #sales-feed{ bottom:110px; } }
+    /* Promo 129 modal */
+    .promo{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6);z-index:75}
+    .promo.open{display:flex}
+    .promo__card{width:min(540px,92vw);background:#0b0e18;border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:18px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+    .promo__header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .promo__badge{font-weight:900;font-size:12px;padding:6px 10px;border-radius:999px;background:var(--cta-grad)}
+    .promo__title{margin:8px 0 6px;font-size:22px}
+    .promo__p{margin:0 0 12px;color:var(--muted)}
+    .promo .actions{display:grid;gap:8px}
+
+    /* Timer persistente */
+    .promo-timer{position:fixed;right:12px;bottom:calc(120px + 12px);z-index:66;background:rgba(14,18,32,.92);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 12px;display:flex;gap:10px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .promo-timer .badge{font-size:12px;font-weight:900;padding:4px 8px;border-radius:999px;background:var(--cta-grad)}
+    .promo-timer b{font-size:18px}
+    .promo-timer .mini-btn{padding:8px 12px;border-radius:999px;font-size:13px;white-space:nowrap}
+    .hide{display:none !important}
+
+    /* Toasts */
+    .toasts{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(70px + 80px);z-index:65;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+    @media (min-width:880px){.toasts{left:auto;right:16px;transform:none;bottom:120px}}
+    .toast{background:var(--toast-bg);border:1px solid rgba(255,255,255,.14);padding:10px 12px;border-radius:12px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;transform:translateY(10px);transition:all .3s ease}
+    .toast.show{opacity:1;transform:translateY(0)}
+    .toast .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.18)}
   </style>
 </head>
 
@@ -214,7 +181,7 @@
     </div>
   </header>
 
-  <!-- HERO + VSL -->
+  <!-- HERO -->
   <section class="hero">
     <div class="hero__bg"></div>
     <div class="container hero__grid">
@@ -222,12 +189,10 @@
         <span class="kicker">Activa hoy • En minutos</span>
         <h1>Películas, canales y deportes <br/>en vivo — <span style="background:var(--cta-grad);-webkit-background-clip:text;background-clip:text;color:transparent">todo en un solo lugar</span>.</h1>
         <p>Funciona en <strong>Smart TV, smartphone y computadora</strong> con la app Smarters IPTV. Sin instalaciones complicadas.</p>
-
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
           <a href="#planes" class="btn btn--primary">Ver paquetes y activar</a>
           <a href="#pasos" class="btn btn--glass">¿Cómo contrato?</a>
         </div>
-
         <div class="proof">
           <span class="chip">+1000 canales</span>
           <span class="chip">Series y películas on-demand</span>
@@ -235,15 +200,14 @@
           <span class="chip">Soporte por WhatsApp</span>
         </div>
       </div>
-
       <div class="vsl">
-        <video id="vsl" muted playsinline autoplay>
+        <video id="vsl" controls playsinline muted>
           <source src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/1cf8a3aae562155c8b7da4e6aee50d0c0c5be91e/C%C3%B3mo%20se%20ve%20el%20servicio%20de%20Streaming%20de%20Be%20Master%20Digital.mp4" type="video/mp4">
         </video>
       </div>
     </div>
 
-    <!-- CONTADOR -->
+    <!-- Contador -->
     <div class="metrics-wrap">
       <div class="metrics" id="metrics">
         <div class="metric"><div class="num" data-target="2900" data-prefix="+"></div><div class="label">canales en vivo</div></div>
@@ -257,17 +221,25 @@
   <section id="testimonios">
     <div class="container">
       <h2 class="section-title">Lo que dicen nuestros clientes</h2>
-      <p class="section-sub">Resultados reales: pagos confirmados, renovaciones y activaciones exitosas.</p>
+      <p class="section-sub">Resultados reales: activaciones y renovaciones exitosas.</p>
 
-      <div class="testi-grid">
-        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.07_5b335bd0.jpg" alt="Testimonio 1"></div>
-        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.08_36eaffb2.jpg" alt="Testimonio 2"></div>
-        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.08_572641eb.jpg" alt="Testimonio 3"></div>
-        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.08_837d4b15.jpg" alt="Testimonio 4"></div>
-        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.08_bec9eec3.jpg" alt="Testimonio 5"></div>
-        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.08_fd014d65.jpg" alt="Testimonio 6"></div>
-        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.09_c0e44bb5.jpg" alt="Testimonio 7"></div>
-        <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.09_da532eca.jpg" alt="Testimonio 8"></div>
+      <div class="testi-wrap">
+        <div class="testi-grid">
+          <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.07_5b335bd0.jpg" alt="Testimonio 1"></div>
+          <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.08_36eaffb2.jpg" alt="Testimonio 2"></div>
+          <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.08_572641eb.jpg" alt="Testimonio 3"></div>
+          <div class="testi"><img src="https://raw.githubusercontent.com/omargama20/CineFlow-Landing-Page/dc756edd62b56de58fd18467bf401f5f7da30683/Imagen%20de%20WhatsApp%202025-09-02%20a%20las%2023.10.09_da532eca.jpg" alt="Testimonio 4"></div>
+        </div>
+        <div class="reviews">
+          <div class="review"><b>Carla Hernández — CDMX</b><p>“Me ayudaron a instalar en mi Fire Stick en 5 minutos. Los canales de deportes se ven súper bien.”</p></div>
+          <div class="review"><b>Álvaro Mendoza — Guadalajara</b><p>“Probé primero con acceso de test y ya activé el plan de 3 conexiones.”</p></div>
+          <div class="review"><b>Daniela López — Monterrey</b><p>“Atención por WhatsApp rápida. Lo puse en mi Roku y quedó perfecto.”</p></div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+        <a href="https://wa.me/message/MONNWYVTCQHWB1" class="btn btn--primary">Quiero activarlo por WhatsApp</a>
+        <a href="#planes" class="btn btn--glass">Ver paquetes</a>
       </div>
     </div>
   </section>
@@ -277,67 +249,25 @@
     <div class="container">
       <h2 class="section-title">Elige tu paquete</h2>
       <p class="section-sub">La diferencia es el número de <strong>conexiones simultáneas</strong>. Sin anuncios. Sin descargas.</p>
-
       <div class="plans__grid">
         <div class="plan">
           <h3>Básico</h3>
           <div class="price"><span>$149</span><small>/mes</small></div>
-          <ul class="ul">
-            <li>1 conexión simultánea</li>
-            <li>+1000 canales y VOD</li>
-            <li>Sin anuncios</li>
-          </ul>
-          <a href="https://mpago.li/1BYfZx1" target="_blank" class="btn btn--primary btn--block">Pagar Básico</a>
-          <a href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" class="btn btn--wa btn--block" rel="noopener">
-            <span class="wa-btn__icon">
-              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <rect width="32" height="32" rx="16" fill="#25D366"/>
-                <path d="M22.63 18.93c-.36-.18-2.13-1.05-2.46-1.17-.33-.12-.57-.18-.81.18-.24.36-.93 1.17-1.14 1.41-.21.24-.42.27-.78.09-.36-.18-1.53-.56-2.91-1.78-1.08-.96-1.8-2.13-2.01-2.49-.21-.36-.02-.55.16-.73.17-.17.39-.45.58-.68.19-.23.25-.39.39-.64.13-.24.07-.48-.03-.67-.09-.18-.81-1.95-1.12-2.68-.3-.72-.61-.62-.81-.63-.21-.01-.45-.01-.69-.01-.24 0-.63.09-.96.42-.33.33-1.26 1.23-1.26 3.01 0 1.77 1.29 3.47 1.47 3.71.18.24 2.53 3.84 6.22 5.23.87.3 1.55.48 2.08.61.87.22 1.67.19 2.29.12.7-.08 2.13-.87 2.43-1.7.3-.83.3-1.54.21-1.7-.09-.15-.33-.24-.69-.42z" fill="#fff"/>
-              </svg>
-            </span>
-            Enviar comprobante por WhatsApp
-          </a>
+          <ul class="ul"><li>1 conexión simultánea</li><li>+1000 canales y VOD</li><li>Sin anuncios</li></ul>
+          <a href="https://wa.me/message/MONNWYVTCQHWB1" class="btn btn--primary btn--block">Activar por WhatsApp</a>
         </div>
-
         <div class="plan">
           <span class="plan__badge">Más popular</span>
           <h3>Estándar</h3>
           <div class="price"><span>$219</span><small>/mes</small></div>
-          <ul class="ul">
-            <li>2 conexiones simultáneas</li>
-            <li>+1000 canales y VOD</li>
-            <li>Sin anuncios</li>
-          </ul>
-          <a href="https://mpago.li/2QyZwxb" target="_blank" class="btn btn--primary btn--block">Pagar Estándar</a>
-          <a href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" class="btn btn--wa btn--block" rel="noopener">
-            <span class="wa-btn__icon">
-              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <rect width="32" height="32" rx="16" fill="#25D366"/>
-                <path d="M22.63 18.93c-.36-.18-2.13-1.05-2.46-1.17-.33-.12-.57-.18-.81.18-.24.36-.93 1.17-1.14 1.41-.21.24-.42.27-.78.09-.36-.18-1.53-.56-2.91-1.78-1.08-.96-1.8-2.13-2.01-2.49-.21-.36-.02-.55.16-.73.17-.17.39-.45.58-.68.19-.23.25-.39.39-.64.13-.24.07-.48-.03-.67-.09-.18-.81-1.95-1.12-2.68-.3-.72-.61-.62-.81-.63-.21-.01-.45-.01-.69-.01-.24 0-.63.09-.96.42-.33.33-1.26 1.23-1.26 3.01 0 1.77 1.29 3.47 1.47 3.71.18.24 2.53 3.84 6.22 5.23.87.3 1.55.48 2.08.61.87.22 1.67.19 2.29.12.7-.08 2.13-.87 2.43-1.7.3-.83.3-1.54.21-1.7-.09-.15-.33-.24-.69-.42z" fill="#fff"/>
-              </svg>
-            </span>
-            Enviar comprobante por WhatsApp
-          </a>
+          <ul class="ul"><li>2 conexiones simultáneas</li><li>+1000 canales y VOD</li><li>Sin anuncios</li></ul>
+          <a href="https://wa.me/message/MONNWYVTCQHWB1" class="btn btn--primary btn--block">Activar por WhatsApp</a>
         </div>
-
         <div class="plan">
           <h3>Premium</h3>
           <div class="price"><span>$299</span><small>/mes</small></div>
-          <ul class="ul">
-            <li>3 conexiones simultáneas</li>
-            <li>+1000 canales y VOD</li>
-            <li>Sin anuncios</li>
-          </ul>
-          <a href="https://mpago.li/1X6DVc6" target="_blank" class="btn btn--primary btn--block">Pagar Premium</a>
-          <a href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" class="btn btn--wa btn--block" rel="noopener">
-            <span class="wa-btn__icon">
-              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <rect width="32" height="32" rx="16" fill="#25D366"/>
-                <path d="M22.63 18.93c-.36-.18-2.13-1.05-2.46-1.17-.33-.12-.57-.18-.81.18-.24.36-.93 1.17-1.14 1.41-.21.24-.42.27-.78.09-.36-.18-1.53-.56-2.91-1.78-1.08-.96-1.8-2.13-2.01-2.49-.21-.36-.02-.55.16-.73.17-.17.39-.45.58-.68.19-.23.25-.39.39-.64.13-.24.07-.48-.03-.67-.09-.18-.81-1.95-1.12-2.68-.3-.72-.61-.62-.81-.63-.21-.01-.45-.01-.69-.01-.24 0-.63.09-.96.42-.33.33-1.26 1.23-1.26 3.01 0 1.77 1.29 3.47 1.47 3.71.18.24 2.53 3.84 6.22 5.23.87.3 1.55.48 2.08.61.87.22 1.67.19 2.29.12.7-.08 2.13-.87 2.43-1.7.3-.83.3-1.54.21-1.7-.09-.15-.33-.24-.69-.42z" fill="#fff"/>
-              </svg>
-            </span>
-            Enviar comprobante por WhatsApp
-          </a>
+          <ul class="ul"><li>3 conexiones simultáneas</li><li>+1000 canales y VOD</li><li>Sin anuncios</li></ul>
+          <a href="https://wa.me/message/MONNWYVTCQHWB1" class="btn btn--primary btn--block">Activar por WhatsApp</a>
         </div>
       </div>
     </div>
@@ -348,41 +278,32 @@
     <div class="container">
       <h2 class="section-title">Contrata en 3 pasos</h2>
       <div class="steps">
-        <div class="step"><h3>Paso #1</h3><p>Selecciona tu paquete (1, 2 o 3 conexiones) y realiza el pago.</p></div>
-        <div class="step"><h3>Paso #2</h3><p>Envía <strong>el comprobante completo</strong> por WhatsApp.</p></div>
-        <div class="step"><h3>Paso #3</h3><p>Te compartimos <strong>instrucciones de instalación</strong> y accesos al contenido.</p></div>
+        <div class="step"><h3>Paso #1</h3><p>Manda mensaje por WhatsApp para instalar la app y verificar compatibilidad de tu dispositivo.</p></div>
+        <div class="step"><h3>Paso #2</h3><p>Te compartimos <strong>accesos de prueba</strong> para validar que puedes ingresar.</p></div>
+        <div class="step"><h3>Paso #3</h3><p>Activa totalmente tu servicio pagando tu mensualidad. Si no se paga a tiempo, el acceso se inhabilita.</p></div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
-        <a href="#planes" class="btn btn--primary">Quiero contratar</a>
+        <a href="https://wa.me/message/MONNWYVTCQHWB1" class="btn btn--primary">Quiero contratar por WhatsApp</a>
         <a href="#faq" class="btn btn--glass">Resolver dudas</a>
       </div>
     </div>
   </section>
 
-  <!-- Dispositivos + Smarters IPTV -->
+  <!-- Dispositivos -->
   <section id="devices">
     <div class="container cards">
       <div class="card">
         <h3>Disfruta en cualquier dispositivo</h3>
         <p>Smart TVs, computadoras, tablets y móviles. Continúa donde te quedaste.</p>
-
         <div class="devices__logos" aria-hidden="true">
-          <div class="devices__logo">TV</div>
-          <div class="devices__logo">Laptop</div>
-          <div class="devices__logo">Tablet</div>
-          <div class="devices__logo">Móvil</div>
-          <div class="devices__logo">Apple TV</div>
-          <div class="devices__logo">Android TV</div>
-          <div class="devices__logo">Roku</div>
-          <div class="devices__logo">Fire Stick</div>
+          <div class="devices__logo">TV</div><div class="devices__logo">Laptop</div><div class="devices__logo">Tablet</div><div class="devices__logo">Móvil</div>
+          <div class="devices__logo">Apple TV</div><div class="devices__logo">Android TV</div><div class="devices__logo">Roku</div><div class="devices__logo">Fire Stick</div>
         </div>
-
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
-          <a href="#planes" class="btn btn--primary">Activar ahora</a>
+          <a href="https://wa.me/message/MONNWYVTCQHWB1" class="btn btn--primary">Activar ahora</a>
           <a href="#faq" class="btn btn--glass">Preguntas frecuentes</a>
         </div>
       </div>
-
       <div class="card">
         <h3>Usamos la app <strong>Smarters IPTV</strong></h3>
         <p>Reproduce nuestro contenido en <em>Smart TV</em>, <em>smartphone</em> y <em>computadora</em>.</p>
@@ -393,7 +314,7 @@
             <p style="color:var(--muted);margin:6px 0 0">Descarga la app, ingresa tus accesos y listo. Te guiamos por WhatsApp si lo necesitas.</p>
           </div>
         </div>
-        <a href="#planes" class="btn btn--primary btn--block" style="margin-top:12px">Quiero empezar</a>
+        <a href="https://wa.me/message/MONNWYVTCQHWB1" class="btn btn--primary btn--block" style="margin-top:12px">Activar por WhatsApp</a>
       </div>
     </div>
   </section>
@@ -402,27 +323,27 @@
   <section id="faq">
     <div class="container faq">
       <h2 class="section-title">Preguntas frecuentes</h2>
-      <div class="accordion">
-        <div class="ac">
-          <button aria-expanded="false">¿Puedo cancelar cuando quiera? <span>＋</span></button>
-          <div class="ac__p"><p>Sí. Simplemente <strong>deja de pagar</strong> y el servicio se pausa al terminar tu periodo. No se cobra nada hasta que vuelvas a contratar.</p></div>
-        </div>
-        <div class="ac">
-          <button aria-expanded="false">¿Hay anuncios? <span>＋</span></button>
-          <div class="ac__p"><p>No. <strong>Ningún plan</strong> incluye anuncios.</p></div>
-        </div>
-        <div class="ac">
-          <button aria-expanded="false">¿Puedo descargar contenido? <span>＋</span></button>
-          <div class="ac__p"><p>No hay descargas: todo se reproduce por streaming.</p></div>
-        </div>
-        <div class="ac">
-          <button aria-expanded="false">¿Qué dispositivos son compatibles? <span>＋</span></button>
-          <div class="ac__p"><p>Smart TVs, Apple TV, Android TV, <strong>Roku</strong>, <strong>Fire Stick</strong>, teléfonos iOS/Android, laptops y tablets.</p></div>
-        </div>
+    <div class="accordion">
+      <div class="ac">
+        <button aria-expanded="false">¿Puedo cancelar cuando quiera? <span>＋</span></button>
+        <div class="ac__p"><p>Sí. Simplemente <strong>deja de pagar</strong> y el servicio se pausa al terminar tu periodo. No se cobra nada hasta que vuelvas a contratar.</p></div>
       </div>
+      <div class="ac">
+        <button aria-expanded="false">¿Hay anuncios? <span>＋</span></button>
+        <div class="ac__p"><p>No. <strong>Ningún plan</strong> incluye anuncios.</p></div>
+      </div>
+      <div class="ac">
+        <button aria-expanded="false">¿Puedo descargar contenido? <span>＋</span></button>
+        <div class="ac__p"><p>No hay descargas: todo se reproduce por streaming.</p></div>
+      </div>
+      <div class="ac">
+        <button aria-expanded="false">¿Qué dispositivos son compatibles? <span>＋</span></button>
+        <div class="ac__p"><p>Smart TVs, Apple TV, Android TV, <strong>Roku</strong>, <strong>Fire Stick</strong>, teléfonos iOS/Android, laptops y tablets.</p></div>
+      </div>
+    </div>
 
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
-        <a href="#planes" class="btn btn--primary">Activar mi plan</a>
+        <a href="https://wa.me/message/MONNWYVTCQHWB1" class="btn btn--primary">Activar por WhatsApp</a>
         <a href="#pasos" class="btn btn--glass">Ver pasos de contratación</a>
       </div>
     </div>
@@ -440,27 +361,25 @@
     </div>
   </footer>
 
-  <!-- Cajita fija inferior (mobile + desktop) -->
+  <!-- Toasts -->
+  <div class="toasts" id="toasts"></div>
+
+  <!-- Sticky CTA -->
   <div class="sticky-cta">
     <div class="sticky-cta__box">
       <span>¿Listo para ver todo hoy?</span>
       <a href="#planes" class="btn btn--primary">Elegir paquete</a>
+      <a href="#pasos" class="btn btn--glass">Cómo contratar</a>
       <a class="btn btn--wa" href="https://wa.me/message/MONNWYVTCQHWB1" target="_blank" rel="noopener">
         <span class="wa-btn__icon">
-          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-            <rect width="32" height="32" rx="16" fill="#25D366"/>
-            <path d="M22.63 18.93c-.36-.18-2.13-1.05-2.46-1.17-.33-.12-.57-.18-.81.18-.24.36-.93 1.17-1.14 1.41-.21.24-.42.27-.78.09-.36-.18-1.53-.56-2.91-1.78-1.08-.96-1.8-2.13-2.01-2.49-.21-.36-.02-.55.16-.73.17-.17.39-.45.58-.68.19-.23.25-.39.39-.64.13-.24.07-.48-.03-.67-.09-.18-.81-1.95-1.12-2.68-.3-.72-.61-.62-.81-.63-.21-.01-.45-.01-.69-.01-.24 0-.63.09-.96.42-.33.33-1.26 1.23-1.26 3.01 0 1.77 1.29 3.47 1.47 3.71.18.24 2.53 3.84 6.22 5.23.87.3 1.55.48 2.08.61.87.22 1.67.19 2.29.12.7-.08 2.13-.87 2.43-1.7.3-.83.3-1.54.21-1.7-.09-.15-.33-.24-.69-.42z" fill="#fff"/>
-          </svg>
+          <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="16" fill="#25D366"/><path d="M22.63 18.93c-.36-.18-2.13-1.05-2.46-1.17-.33-.12-.57-.18-.81.18-.24.36-.93 1.17-1.14 1.41-.21.24-.42.27-.78.09-.36-.18-1.53-.56-2.91-1.78-1.08-.96-1.8-2.13-2.01-2.49-.21-.36-.02-.55.16-.73.17-.17.39-.45.58-.68.19-.23.25-.39.39-.64.13-.24.07-.48-.03-.67-.09-.18-.81-1.95-1.12-2.68-.3-.72-.61-.62-.81-.63-.21-.01-.45-.01-.69-.01-.24 0-.63.09-.96.42-.33.33-1.26 1.23-1.26 3.01 0 1.77 1.29 3.47 1.47 3.71.18.24 2.53 3.84 6.22 5.23.87.3 1.55.48 2.08.61.87.22 1.67.19 2.29.12.7-.08 2.13-.87 2.43-1.7.3-.83.3-1.54.21-1.7-.09-.15-.33-.24-.69-.42z" fill="#fff"/></svg>
         </span>
         Chatear con alguien
       </a>
     </div>
   </div>
 
-  <!-- Sales feed (notificaciones de compra) -->
-  <div id="sales-feed" aria-live="polite"></div>
-
-  <!-- POP-UP de salida (mobile) -->
+  <!-- Exit intent -->
   <div id="exitModal" class="modal" aria-hidden="true">
     <div class="modal__sheet">
       <h3>🎁 Promo vigente</h3>
@@ -473,11 +392,49 @@
     </div>
   </div>
 
+  <!-- Promo 129 -->
+  <div id="promo129" class="promo" aria-hidden="true">
+    <div class="promo__card">
+      <div class="promo__header">
+        <span class="promo__badge">Oferta especial</span>
+        <button id="promo129Close" class="btn btn--glass" style="padding:8px 10px;border-radius:10px">Cerrar</button>
+      </div>
+      <h3 class="promo__title">🎬 Paquete especial: <b>$129 MXN</b> por <b>3 conexiones</b></h3>
+      <p class="promo__p">No pagas nada hasta que <strong>esté instalado tu servicio</strong>. Escríbenos por WhatsApp para activarlo ahora mismo.</p>
+      <div class="actions">
+        <a href="https://wa.me/message/MONNWYVTCQHWB1" class="btn btn--primary btn--block">Activar por WhatsApp</a>
+        <small class="hint">Válido hoy • Sujeto a disponibilidad</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timer -->
+  <div id="promoTimer" class="promo-timer hide" aria-live="polite">
+    <span class="badge">Promo $129</span>
+    Termina en <b id="promoCountdown">15:00</b>
+    <a href="https://wa.me/message/MONNWYVTCQHWB1" class="btn btn--primary mini-btn">Activar por WhatsApp</a>
+  </div>
+
+  <!-- Urgency modals -->
+  <div id="urgencyModal" class="promo" aria-hidden="true">
+    <div class="promo__card">
+      <div class="promo__header">
+        <span class="promo__badge">¡Atención!</span>
+        <button id="urgencyClose" class="btn btn--glass" style="padding:8px 10px;border-radius:10px">Cerrar</button>
+      </div>
+      <h3 class="promo__title" id="urgencyTitle">⏳ Últimos minutos para la promo</h3>
+      <p class="promo__p" id="urgencyText">Quedan pocos minutos para activar el plan de $129 MXN (3 conexiones).</p>
+      <div class="actions">
+        <a href="https://wa.me/message/MONNWYVTCQHWB1" class="btn btn--primary btn--block">Activar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Año dinámico
+    // Año
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // FAQ acordeón
+    // Accordion
     document.querySelectorAll('.ac button').forEach(btn=>{
       btn.addEventListener('click',()=>{
         const p = btn.parentElement.querySelector('.ac__p');
@@ -487,122 +444,148 @@
       });
     });
 
-    // Contador (one-shot)
+    // Metrics one-shot
     (function(){
-      const wrap = document.getElementById('metrics');
-      if(!wrap) return;
+      const wrap = document.getElementById('metrics'); if(!wrap) return;
       const fmt = n => n.toLocaleString('es-MX');
-      const run = () => {
-        wrap.querySelectorAll('.num').forEach(el=>{
-          const target = +el.dataset.target;
-          const prefix = el.dataset.prefix || '';
-          const dur = 1400;
-          const start = performance.now();
-          const tick = (t) => {
-            const p = Math.min(1, (t - start) / dur);
-            const val = Math.round(target * (0.2 + 0.8 * p));
-            el.textContent = prefix + fmt(Math.min(val, target));
-            if(p < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
-        });
-      };
-      const obs = new IntersectionObserver((entries)=>{
-        if(entries.some(e=>e.isIntersecting)){ run(); obs.disconnect(); }
-      }, {threshold: 0.2});
+      const run = () => wrap.querySelectorAll('.num').forEach(el=>{
+        const target = +el.dataset.target, prefix = el.dataset.prefix || '';
+        const dur = 1400, start = performance.now();
+        const tick = t => {
+          const p = Math.min(1,(t-start)/dur);
+          el.textContent = prefix + fmt(Math.round(target*(0.2+0.8*p)));
+          if(p<1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+      const obs = new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ run(); obs.disconnect(); } },{threshold:.2});
       obs.observe(wrap);
     })();
 
-    // Autoplay VSL y habilitar sonido tras primer interacción
+    // Autoplay VSL (sonido tras 1ª interacción)
     (function(){
-      const v = document.getElementById('vsl');
-      if(!v) return;
-      const tryPlay = () => v.play().catch(()=>{});
-      tryPlay();
-      const enableSound = () => { v.muted = false; v.volume = 1; v.play(); };
-      document.addEventListener('click', enableSound, { once: true });
-      document.addEventListener('touchstart', enableSound, { once: true });
+      const v = document.getElementById('vsl'); if(!v) return;
+      v.play().catch(()=>{});
+      const go = ()=>{ v.muted=false; v.volume=1; v.play().catch(()=>{}); };
+      document.addEventListener('click',go,{once:true});
+      document.addEventListener('touchstart',go,{once:true});
     })();
 
-    // Exit intent (mobile)
+    // Exit intent móvil
     const modal = document.getElementById('exitModal');
     const closeBtn = document.getElementById('exitClose');
-    const openModal = () => {
-      if (sessionStorage.getItem('exit_shown') === '1') return;
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden','false');
+    const openExit = ()=>{
+      if(sessionStorage.getItem('exit_shown')==='1') return;
+      modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
       sessionStorage.setItem('exit_shown','1');
     };
     closeBtn.addEventListener('click',()=>{ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
-
     const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-    if (isMobile) {
-      history.pushState({p:1}, '', location.href);
-      window.addEventListener('popstate', ()=>{
-        openModal();
-        history.pushState({p:1}, '', location.href);
-      }, {passive:true});
+    if(isMobile){
+      history.pushState({p:1},'',location.href);
+      window.addEventListener('popstate',()=>{ openExit(); history.pushState({p:1},'',location.href); },{passive:true});
+    }
+    let lastY=window.scrollY, fired=false;
+    window.addEventListener('scroll',()=>{
+      const y=window.scrollY, d=document.documentElement;
+      const scrolled=y/(d.scrollHeight-d.clientHeight), upFast=(lastY-y)>120;
+      if(!fired && scrolled>0.5 && upFast && isMobile){ fired=true; openExit(); }
+      lastY=y;
+    },{passive:true});
+
+    // Promo al entrar a "devices"
+    (function(){
+      const promo = document.getElementById('promo129');
+      const close = document.getElementById('promo129Close');
+      if(!promo) return;
+
+      const showPromo = ()=>{
+        if(sessionStorage.getItem('promo129_shown')==='1') return;
+        promo.classList.add('open'); promo.setAttribute('aria-hidden','false');
+        sessionStorage.setItem('promo129_shown','1');
+      };
+      const obs = new IntersectionObserver(es=>{
+        if(es.some(e=>e.isIntersecting)){ showPromo(); obs.disconnect(); }
+      },{threshold:.35});
+      const devices = document.getElementById('devices'); if(devices) obs.observe(devices);
+
+      const startTimer = ()=>{
+        if(!sessionStorage.getItem('promo_deadline')){
+          const deadline = Date.now()+15*60*1000; // 15 min
+          sessionStorage.setItem('promo_deadline', String(deadline));
+        }
+        document.getElementById('promoTimer').classList.remove('hide');
+        runCountdown();
+      };
+
+      close.addEventListener('click',()=>{ promo.classList.remove('open'); promo.setAttribute('aria-hidden','true'); startTimer(); });
+      promo.addEventListener('click',e=>{ if(e.target===promo){ close.click(); } });
+
+      if(sessionStorage.getItem('promo_deadline')){
+        document.getElementById('promoTimer').classList.remove('hide');
+        runCountdown();
+      }
+    })();
+
+    // Timer + urgencia
+    function runCountdown(){
+      const timerWrap=document.getElementById('promoTimer');
+      const out=document.getElementById('promoCountdown');
+      const urgency=document.getElementById('urgencyModal');
+      const uTitle=document.getElementById('urgencyTitle');
+      const uText=document.getElementById('urgencyText');
+      const uClose=document.getElementById('urgencyClose');
+      if(!timerWrap||!out) return;
+
+      let deadline=parseInt(sessionStorage.getItem('promo_deadline')||'0',10);
+      const k5='urg5_shown', k1='urg1_shown';
+
+      function tick(){
+        const now=Date.now(); let left=Math.max(0,deadline-now);
+        const m=String(Math.floor(left/60000)).padStart(2,'0');
+        const s=String(Math.floor((left%60000)/1000)).padStart(2,'0');
+        out.textContent=`${m}:${s}`;
+
+        const minsLeft=Math.ceil(left/60000);
+        if(minsLeft<=5 && !sessionStorage.getItem(k5) && left>0){
+          sessionStorage.setItem(k5,'1');
+          uTitle.textContent='⏳ Quedan 5 minutos';
+          uText.textContent='Aprovecha la promo de $129 MXN (3 conexiones) antes de que termine.';
+          urgency.classList.add('open'); urgency.setAttribute('aria-hidden','false');
+        }
+        if(minsLeft<=1 && !sessionStorage.getItem(k1) && left>0){
+          sessionStorage.setItem(k1,'1');
+          uTitle.textContent='🚨 Último minuto';
+          uText.textContent='Estás a tiempo de activar la promo de $129 MXN (3 conexiones).';
+          urgency.classList.add('open'); urgency.setAttribute('aria-hidden','false');
+        }
+
+        if(left<=0){
+          timerWrap.classList.add('hide'); sessionStorage.removeItem('promo_deadline'); return;
+        }
+        requestAnimationFrame(tick);
+      }
+      uClose?.addEventListener('click',()=>{ urgency.classList.remove('open'); urgency.setAttribute('aria-hidden','true'); });
+      requestAnimationFrame(tick);
     }
 
-    let lastY = window.scrollY, fired = false;
-    window.addEventListener('scroll', ()=>{
-      const y = window.scrollY, doc = document.documentElement;
-      const scrolled = (y / (doc.scrollHeight - doc.clientHeight));
-      const goingUpFast = (lastY - y) > 120;
-      if (!fired && scrolled > 0.5 && goingUpFast && isMobile) {
-        fired = true; openModal();
+    // Toasts simuladas (30 nombres) — 10s mobile / 18s desktop
+    (function(){
+      const names=["Sofía G.","Valentina R.","Camila H.","María P.","Isabella C.","Ximena L.","Regina V.","Gabriela D.","José M.","Juan P.","Luis A.","Diego F.","Carlos E.","Mateo R.","Santiago V.","Emiliano N.","Andrés Q.","Felipe S.","Martina Z.","Fernanda T.","Paula I.","Ana L.","Lucía O.","Elena B.","Jorge C.","Ricardo K.","Daniel U.","Alejandro W.","Bruno Y.","Tomás J."];
+      const cities=["CDMX","Monterrey","Guadalajara","Puebla","León","Querétaro","Mérida","Tijuana","Bogotá","Lima","Santiago","Quito","Rosario","Córdoba","Medellín"];
+      const packs=["Básico (1x)","Estándar (2x)","Premium (3x)"];
+      const el=document.getElementById('toasts'); if(!el) return;
+      let i=0; const isMob=/Mobi|Android/i.test(navigator.userAgent); const delay=isMob?10000:18000;
+      function showToast(){
+        const name=names[i%names.length], city=cities[Math.floor(Math.random()*cities.length)], pack=packs[Math.floor(Math.random()*packs.length)];
+        const mentionPromo=Math.random()<0.6 && !!sessionStorage.getItem('promo_deadline');
+        const msg=mentionPromo?`<b>${name}</b> de ${city} aprovechó la <b>promo $129</b> (3 conexiones)`: `<b>${name}</b> de ${city} contrató <b>${pack}</b>`;
+        const node=document.createElement('div'); node.className='toast'; node.innerHTML=`<span class="dot"></span><span>${msg}</span>`;
+        el.appendChild(node); requestAnimationFrame(()=>node.classList.add('show'));
+        setTimeout(()=>{ node.classList.remove('show'); setTimeout(()=>node.remove(),300); }, Math.min(delay*1.4,16000));
+        i++;
       }
-      lastY = y;
-    }, {passive:true});
-
-    // ===== Sales feed simulado =====
-    (() => {
-      const elFeed = document.getElementById('sales-feed');
-      if (!elFeed) return;
-
-      const names = [
-        ["Julieta","Montevideo","UY"],["Valentina","Santiago","CL"],["Diego","Ciudad de México","MX"],
-        ["Camila","Lima","PE"],["Agustín","Buenos Aires","AR"],["Luciana","Bogotá","CO"],
-        ["Mateo","Guadalajara","MX"],["Sofía","Quito","EC"],["Bruno","Curitiba","BR"],
-        ["Isabella","Medellín","CO"],["Thiago","São Paulo","BR"],["Martina","Asunción","PY"],
-        ["Emilia","Córdoba","AR"],["Benjamín","Monterrey","MX"],["Renata","La Paz","BO"],
-        ["Dylan","San José","CR"],["Antonella","Rosario","AR"],["Sebastián","Caracas","VE"],
-        ["Florencia","Mar del Plata","AR"],["Franco","Valparaíso","CL"],["Gabriela","Tijuana","MX"],
-        ["Juan Pablo","Barranquilla","CO"],["Ximena","Puebla","MX"],["Pedro","Oporto","PT"],
-        ["Nicole","Arequipa","PE"],["Andrés","Manizales","CO"],["Lourdes","Mérida","MX"],
-        ["Marcos","Salvador","BR"],["Paula","Antofagasta","CL"],["Tomás","Neuquén","AR"]
-      ];
-      const packs = [
-        {name:"Básico", verb:"acaba de contratar"},
-        {name:"Estándar", verb:"acaba de contratar"},
-        {name:"Premium", verb:"acaba de contratar"}
-      ];
-
-      const isMob = /Mobi|Android/i.test(navigator.userAgent);
-      const INTERVAL_MS = isMob ? 10000 : 14000; // 10s móvil, 14s desktop
-
-      let idx = 0;
-      function nextToast(){
-        const [n, city, cc] = names[idx % names.length];
-        const pack = packs[Math.floor(Math.random()*packs.length)];
-        idx++;
-
-        const t = document.createElement('div');
-        t.className = 'toast';
-        t.innerHTML = `
-          <div>
-            <div><span class="name">${n}</span> de ${city} <span class="country">${cc}</span></div>
-            <div class="line2">Acaba de contratar <strong>${pack.name}</strong></div>
-          </div>
-        `;
-        elFeed.innerHTML = '';
-        elFeed.appendChild(t);
-        requestAnimationFrame(()=> t.classList.add('show'));
-        setTimeout(()=> t.classList.remove('show'), INTERVAL_MS - 1000);
-      }
-
-      nextToast();
-      setInterval(nextToast, INTERVAL_MS);
+      setTimeout(showToast,4000); setInterval(showToast,delay);
     })();
   </script>
 </body>
