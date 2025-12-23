@@ -1,4 +1,14 @@
+Listo — ya vi el problema en tu screenshot: el **sticky** todavía está intentando “apretar” los botones dentro de un layout horizontal, y en iPhone termina **recortando** (overflow visual) cuando se apilan o cuando el ancho real es menor.
 
+✅ **Solución definitiva:** en móvil el sticky se vuelve **2 filas**:
+
+1. fila del precio
+2. fila de botones (2 columnas)
+   y en pantallas muy chicas se apilan en 1 columna.
+
+Aquí tienes el **código completo** ya corregido (incluye la opción de audio “primer tap activa sonido” + sticky arreglado):
+
+```html
 <!doctype html>
 <html lang="es-MX">
 <head>
@@ -41,6 +51,7 @@
         var(--bg);
       color:var(--text);
       -webkit-tap-highlight-color:transparent;
+      overflow-x:hidden; /* ✅ evita cualquier “corrimiento” horizontal */
     }
     a{color:inherit;text-decoration:none}
     img,video{display:block;max-width:100%}
@@ -48,7 +59,7 @@
     /* ===== 1 pantalla ===== */
     .screen{
       min-height:100dvh;
-      padding: calc(10px + var(--safe-top)) 12px calc(86px + var(--safe-bottom)) 12px; /* espacio sticky */
+      padding: calc(10px + var(--safe-top)) 12px calc(130px + var(--safe-bottom)) 12px; /* ✅ más aire para sticky */
       display:flex;
       flex-direction:column;
       gap:10px;
@@ -106,7 +117,7 @@
     .reel{
       width: 100%;
       height: 100%;
-      max-height: calc(100dvh - 160px);
+      max-height: calc(100dvh - 170px);
       aspect-ratio: 9 / 16;
       border-radius: 18px;
       overflow:hidden;
@@ -241,7 +252,7 @@
 
     /* ===== Sección dispositivos ===== */
     .section{
-      padding: 2px 12px 120px 12px;
+      padding: 2px 12px 160px 12px; /* ✅ aire extra al final */
       max-width: 560px;
       margin: 0 auto;
     }
@@ -285,40 +296,52 @@
       color: rgba(232,236,248,.84);
     }
 
-    /* ===== Sticky bar (FIX overflow iPhone) ===== */
+    /* ===== Sticky bar (FIX definitivo iPhone) ===== */
     .sticky{
       position:fixed;
       left:0; right:0; bottom:0;
-      padding: 10px 12px calc(10px + var(--safe-bottom)) 12px;
+      padding: 10px 12px calc(12px + var(--safe-bottom)) 12px;
       background: linear-gradient(180deg, rgba(10,11,16,0) 0%, rgba(10,11,16,.55) 30%, rgba(10,11,16,.92) 100%);
       backdrop-filter: blur(12px);
       z-index:50;
     }
+
     .bar{
       max-width: 560px;
       margin: 0 auto;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:space-between;
       border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
       border-radius: 16px;
-      padding: 10px;
+      padding: 12px;
       box-shadow: 0 18px 60px rgba(0,0,0,.5);
+      overflow: visible; /* ✅ evita recortes visuales */
     }
-    .priceBlock{
+
+    /* ✅ Layout sticky: 2 filas siempre en móvil */
+    .barGrid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+    }
+
+    .priceRow{
       display:flex;
-      flex-direction:column;
-      gap:2px;
-      min-width: 140px; /* ✅ más pequeño */
-      flex: 0 0 auto;   /* ✅ no crece */
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:10px;
+      min-width:0;
     }
+
+    .priceBlock{
+      min-width:0;
+    }
+
     .price{
       font-size:18px;
       font-weight: 950;
       letter-spacing:-.3px;
       line-height:1.05;
+      white-space:nowrap;
     }
     .price small{
       font-size:12px;
@@ -330,15 +353,14 @@
       font-size:12px;
       color: rgba(232,236,248,.72);
       font-weight:650;
+      margin-top:6px;
     }
 
     .actions{
-      flex: 1 1 auto; /* ✅ ocupa lo restante */
-      min-width: 0;   /* ✅ evita desbordes iOS */
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap:8px;
-      /* ✅ quitamos width:100% */
+      gap:10px;
+      min-width:0;
     }
 
     .btn{
@@ -346,7 +368,7 @@
       align-items:center;
       justify-content:center;
       gap:8px;
-      padding: 12px 12px;
+      padding: 13px 12px;
       border-radius: 999px;
       font-weight: 900;
       letter-spacing:.2px;
@@ -356,31 +378,34 @@
       transition: transform .08s ease, box-shadow .2s ease, filter .2s ease;
       user-select:none;
       white-space:nowrap;
-      width:100%; /* ✅ cada botón ocupa su celda */
+      width:100%;
     }
     .btn:active{ transform: scale(.985); }
+
     .btn.primary{
       border:1px solid rgba(255,255,255,.10);
       background: var(--cta-grad);
       box-shadow: 0 10px 28px var(--cta-glow);
     }
+
     .btn.wa{
       background: var(--wa);
       border: none;
       box-shadow: 0 10px 26px rgba(37,211,102,.18);
       color:#fff;
     }
+
     .waIcon{
       width:20px;height:20px;
       background:#fff;border-radius:50%;
       display:grid;place-items:center;
+      flex: 0 0 auto;
     }
     .waIcon svg{width:13px;height:13px;display:block}
 
-    /* ✅ si se aprieta, apila botones */
-    @media (max-width:420px){
+    /* ✅ si es muy angosto: apila botones para que NO se corten */
+    @media (max-width:380px){
       .actions{ grid-template-columns: 1fr; }
-      .priceBlock{ min-width: 120px; }
     }
 
     /* Desktop preview */
@@ -414,7 +439,7 @@
     <section class="hero" aria-label="Demo vertical">
       <div class="reel" id="reel">
 
-        <!-- ✅ Opción 2: “suene” lo antes posible (primer tap activa audio) -->
+        <!-- ✅ Opción 2: primer tap activa audio -->
         <div class="hint" id="hint">👆 Toca el video para activar audio</div>
 
         <button class="sound" id="soundBtn" type="button">🔇 Audio</button>
@@ -488,25 +513,32 @@
     </div>
   </section>
 
+  <!-- Sticky CTA -->
   <div class="sticky" role="region" aria-label="Contratación">
     <div class="bar">
-      <div class="priceBlock">
-        <div class="price">$129 <small>MXN / mes</small></div>
-        <div class="line2">3 dispositivos • soporte WhatsApp</div>
-      </div>
+      <div class="barGrid">
+        <div>
+          <div class="priceRow">
+            <div class="priceBlock">
+              <div class="price">$129 <small>MXN / mes</small></div>
+              <div class="line2">3 dispositivos • soporte WhatsApp</div>
+            </div>
+          </div>
+        </div>
 
-      <div class="actions">
-        <a class="btn wa" id="trialBtn" href="#" target="_blank" rel="noopener">
-          <span class="waIcon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M16 3C9.37 3 4 8.2 4 14.62c0 2.53.86 4.86 2.33 6.74L5 29l7.88-1.98c1.85.98 3.98 1.54 6.24 1.54 6.63 0 12-5.2 12-11.62C31.12 8.2 22.63 3 16 3Z" fill="#111827"/>
-              <path d="M22.7 19.26c-.27.74-1.33 1.42-1.83 1.48-.48.06-1.07.09-1.72-.11-.4-.13-.92-.3-1.58-.58-2.78-1.19-4.58-3.98-4.72-4.17-.14-.19-1.12-1.47-1.12-2.81 0-1.34.71-2 1-2.28.29-.28.64-.35.85-.35.21 0 .42 0 .6.01.2.01.46-.08.72.54.27.63.92 2.19 1 2.35.08.16.13.36.02.57-.1.22-.15.35-.3.54-.15.19-.31.42-.44.56-.15.16-.31.33-.13.64.18.32.8 1.3 1.72 2.1 1.18 1.03 2.17 1.35 2.49 1.5.32.15.51.13.7-.08.19-.21.81-.93 1.03-1.25.22-.32.44-.26.74-.16.3.11 1.92.88 2.25 1.04.33.16.55.24.63.37.08.13.08.75-.19 1.49Z" fill="#ffffff"/>
-            </svg>
-          </span>
-          <span>Quiero mi prueba</span>
-        </a>
+        <div class="actions">
+          <a class="btn wa" id="trialBtn" href="#" target="_blank" rel="noopener">
+            <span class="waIcon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 3C9.37 3 4 8.2 4 14.62c0 2.53.86 4.86 2.33 6.74L5 29l7.88-1.98c1.85.98 3.98 1.54 6.24 1.54 6.63 0 12-5.2 12-11.62C31.12 8.2 22.63 3 16 3Z" fill="#111827"/>
+                <path d="M22.7 19.26c-.27.74-1.33 1.42-1.83 1.48-.48.06-1.07.09-1.72-.11-.4-.13-.92-.3-1.58-.58-2.78-1.19-4.58-3.98-4.72-4.17-.14-.19-1.12-1.47-1.12-2.81 0-1.34.71-2 1-2.28.29-.28.64-.35.85-.35.21 0 .42 0 .6.01.2.01.46-.08.72.54.27.63.92 2.19 1 2.35.08.16.13.36.02.57-.1.22-.15.35-.3.54-.15.19-.31.42-.44.56-.15.16-.31.33-.13.64.18.32.8 1.3 1.72 2.1 1.18 1.03 2.17 1.35 2.49 1.5.32.15.51.13.7-.08.19-.21.81-.93 1.03-1.25.22-.32.44-.26.74-.16.3.11 1.92.88 2.25 1.04.33.16.55.24.63.37.08.13.08.75-.19 1.49Z" fill="#ffffff"/>
+              </svg>
+            </span>
+            <span>Quiero mi prueba</span>
+          </a>
 
-        <a class="btn primary" id="buyBtn" href="#" target="_blank" rel="noopener">Contratar</a>
+          <a class="btn primary" id="buyBtn" href="#" target="_blank" rel="noopener">Contratar</a>
+        </div>
       </div>
     </div>
   </div>
@@ -576,7 +608,6 @@
       if(tag === "a" || tag === "button") return;
 
       hint.classList.add("hide");
-
       if (v.muted) setSound(true);
 
       if(v.paused){
@@ -597,4 +628,4 @@
 </html>
 ```
 
-
+Con este layout, en iPhone **ya no se van a cortar**: el sticky siempre respeta el ancho y el alto, y si el dispositivo es muy angosto, los botones se apilan automáticamente.
