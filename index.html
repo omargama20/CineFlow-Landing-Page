@@ -285,7 +285,7 @@
       color: rgba(232,236,248,.84);
     }
 
-    /* ===== Sticky bar ===== */
+    /* ===== Sticky bar (FIX overflow iPhone) ===== */
     .sticky{
       position:fixed;
       left:0; right:0; bottom:0;
@@ -311,7 +311,8 @@
       display:flex;
       flex-direction:column;
       gap:2px;
-      min-width: 150px;
+      min-width: 140px; /* ✅ más pequeño */
+      flex: 0 0 auto;   /* ✅ no crece */
     }
     .price{
       font-size:18px;
@@ -330,12 +331,16 @@
       color: rgba(232,236,248,.72);
       font-weight:650;
     }
+
     .actions{
+      flex: 1 1 auto; /* ✅ ocupa lo restante */
+      min-width: 0;   /* ✅ evita desbordes iOS */
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap:8px;
-      width:100%;
+      /* ✅ quitamos width:100% */
     }
+
     .btn{
       display:inline-flex;
       align-items:center;
@@ -351,6 +356,7 @@
       transition: transform .08s ease, box-shadow .2s ease, filter .2s ease;
       user-select:none;
       white-space:nowrap;
+      width:100%; /* ✅ cada botón ocupa su celda */
     }
     .btn:active{ transform: scale(.985); }
     .btn.primary{
@@ -371,6 +377,12 @@
     }
     .waIcon svg{width:13px;height:13px;display:block}
 
+    /* ✅ si se aprieta, apila botones */
+    @media (max-width:420px){
+      .actions{ grid-template-columns: 1fr; }
+      .priceBlock{ min-width: 120px; }
+    }
+
     /* Desktop preview */
     @media (min-width:900px){
       body{ display:grid; place-items:center; padding:24px; }
@@ -384,11 +396,6 @@
       }
       .bar{ max-width: 460px; }
       .section{ max-width: 460px; }
-    }
-    @media (max-width:360px){
-      .actions{ grid-template-columns: 1fr; }
-      .priceBlock{ min-width: 0; }
-      .bar{ align-items:flex-start; }
     }
   </style>
 </head>
@@ -407,9 +414,7 @@
     <section class="hero" aria-label="Demo vertical">
       <div class="reel" id="reel">
 
-        <!-- ✅ Opción 2: “suene” lo antes posible.
-             Inicia en mute (por reglas del navegador),
-             y en el PRIMER TAP en el video se activa el audio automáticamente. -->
+        <!-- ✅ Opción 2: “suene” lo antes posible (primer tap activa audio) -->
         <div class="hint" id="hint">👆 Toca el video para activar audio</div>
 
         <button class="sound" id="soundBtn" type="button">🔇 Audio</button>
@@ -546,10 +551,8 @@
       }
     }
 
-    // Intentar autoplay (si falla, mostramos play)
     v.play().then(()=>setPlayingUI(true)).catch(()=>setPlayingUI(false));
 
-    // Botón audio manual
     soundBtn.addEventListener("click", () => {
       setSound(v.muted);
       hint.classList.add("hide");
@@ -557,7 +560,6 @@
       setPlayingUI(!v.paused);
     });
 
-    // Play/Pause manual
     playBtn.addEventListener("click", () => {
       hint.classList.add("hide");
       if(v.paused){
@@ -568,14 +570,13 @@
       }
     });
 
-    // ✅ OPCIÓN 2: primer tap en el video = activa audio + reproduce
+    // ✅ primer tap en el video = activa audio + reproduce
     reel.addEventListener("click", (e) => {
       const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
       if(tag === "a" || tag === "button") return;
 
       hint.classList.add("hide");
 
-      // primer tap: enciende audio si venía mute
       if (v.muted) setSound(true);
 
       if(v.paused){
@@ -586,7 +587,6 @@
       }
     });
 
-    // iOS: asegurar primer play por touch
     document.addEventListener("touchstart", () => { v.play().catch(()=>{}); }, { once:true, passive:true });
 
     v.addEventListener("ended", () => setPlayingUI(false));
@@ -596,4 +596,5 @@
 </body>
 </html>
 ```
+
 
