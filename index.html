@@ -1,14 +1,4 @@
-Listo — ya vi el problema en tu screenshot: el **sticky** todavía está intentando “apretar” los botones dentro de un layout horizontal, y en iPhone termina **recortando** (overflow visual) cuando se apilan o cuando el ancho real es menor.
 
-✅ **Solución definitiva:** en móvil el sticky se vuelve **2 filas**:
-
-1. fila del precio
-2. fila de botones (2 columnas)
-   y en pantallas muy chicas se apilan en 1 columna.
-
-Aquí tienes el **código completo** ya corregido (incluye la opción de audio “primer tap activa sonido” + sticky arreglado):
-
-```html
 <!doctype html>
 <html lang="es-MX">
 <head>
